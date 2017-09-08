@@ -1,0 +1,71 @@
+* Buffer Commands
+
+C-x C-q: Toggle read-only status of buffer 
+
+
+* Org Mode Commands
+
+** Clock
+
+Org mode allows you to clock the time you spend on specific tasks in a project.
+
+C-c C-x C-i
+    Start the clock on the current item (clock-in). This inserts the CLOCK keyword together with a timestamp. When called with a C-u prefix argument, select the task from a list of recently clocked tasks.
+C-c C-x C-o
+    Stop the clock (clock-out). This inserts another timestamp at the same location where the clock was last started. It also directly computes the resulting time in inserts it after the time range as ‘=> HH:MM’.
+C-c C-x C-e
+    Update the effort estimate for the current clock task.
+C-c C-x C-q
+    Cancel the current clock. This is useful if a clock was started by mistake, or if you ended up working on something else.
+C-c C-x C-j
+    Jump to the entry that contains the currently running clock. With a C-u prefix arg, select the target task from a list of recently clocked tasks.
+C-c C-x C-r
+    Insert a dynamic block containing a clock report as an Org-mode table into the current file. When the cursor is at an existing clock table, just update it.
+
+              #+BEGIN: clocktable :maxlevel 2 :emphasize nil :scope file
+              #+END: clocktable
+
+    For details about how to customize this view, see the manual.
+C-c C-c
+    Update dynamic block at point. The cursor needs to be in the #+BEGIN line of the dynamic block. 
+C-c C-c or C-c C-y     (org-evaluate-time-range)
+    Recompute the time interval after changing one of the timestamps. 
+    This is only necessary if you edit the timestamps directly. If you change them with S-<cursor> keys, the update is automatic. 
+
+*** Clock Table (options)
+We can set e.g *:block* to absolute or relative time, today, thisweek or thismonth, etc (see block: below).
+For block of more than one day we can set interval using :step day/week 
+Examples:
+#+BEGIN: clocktable :maxlevel 2 :scope subtree :block today :stepskip0
+#+END:
+#+BEGIN: clocktable :maxlevel 2 :scope subtree :block thismonth :step day :stepskip0
+
+Daily report: [2017-09-06 Mi]
+| Headline                                     | Time   |      |
+|----------------------------------------------+--------+------|
+| *Total time*                                 | *3:32* |      |
+|----------------------------------------------+--------+------|
+| \_  GAIAMCS-1533: Is the DARC OK, current... |        | 3:32 |
+
+Daily report: [2017-09-07 Do]
+| Headline                                     | Time   |      |
+|----------------------------------------------+--------+------|
+| *Total time*                                 | *1:00* |      |
+|----------------------------------------------+--------+------|
+| \_  GAIAMCS-1533: Is the DARC OK, current... |        | 1:00 |
+
+#+END:
+
+block: The time block to consider.  This block is specified either
+absolutely, or relative to the current time and may be any of these formats:
+  2007-12-31    New year eve 2007
+  2007-12       December 2007
+  2007-W50      ISO-week 50 in 2007
+  2007-Q2       2nd quarter in 2007
+  2007          the year 2007
+  today, yesterday, today-N          a relative day
+  thisweek, lastweek, thisweek-N     a relative week
+  thismonth, lastmonth, thismonth-N  a relative month
+  thisyear, lastyear, thisyear-N     a relative year
+  untilnow
+http://orgmode.org/manual/The-clock-table.html
