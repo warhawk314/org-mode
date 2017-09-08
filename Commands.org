@@ -1,10 +1,13 @@
+* Notes
 Note that this org file is tracked in a local git repo, and has a remote github origin:
  https://www.github.com/warhawk314/org-mode.git
+
+ git push origin master
+ git pull origin
 
 * Buffer Commands
 
 C-x C-q: Toggle read-only status of buffer 
-
 
 * Org Mode Commands
 
