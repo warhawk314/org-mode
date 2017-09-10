@@ -1,42 +1,105 @@
 * Notes
-Note that this org file is tracked in a local git repo, and has a remote github origin:
- https://www.github.com/warhawk314/org-mode.git
 
- git push origin master
- git pull origin
+  Note that this org file is tracked in a local git repo, and has a remote github origin:
+  https://www.github.com/warhawk314/org-mode.git
+  
+  git push origin master
+  git pull origin
+
+* Basics
+
+  Meta is Alt, e.g. Meta-q is Alt-q
+
+* Environment
+   
+** Search Path
+   
+   Evaluate (executable-find "find") to see where Emacs finds the find executable
+   Evaluate (getenv "PATH") to see what PATH is setto in your Emacs environment.
+
+   
+   http://ergoemacs.org/emacs/emacs_env_var_paths.html
+  
+   The Windows System *PATH* tells your PC where it can find specific directories.
+   This can be set in Emacs.
+   
+   Emacs's exec-path Emacs has a variable named *exec-path*. Its value is a list
+   of dir paths. Emacs uses exec-path to find executable binary programs. For
+   example, when spell checking, emacs will try to find ispell or aspell in
+   exec-path. When you press Z to compress file in dired, emacs will try to find
+   gzip or gunzip in exec-path. When you call any of emacs commands: {diff,
+   grep, shell}, emacs will try to find the program in exec-path too. If emacs
+   complains that it cannot find ispell, aspell, ftp, gzip, etc, the problem is
+   probably with your exec-path. By default, emacs copies the value of (getenv
+   "PATH") to exec-path. So, their values should be identical.
+   
+   Difference between exec-path and PATH The value of environment variable “PATH”
+   is used by emacs when you are running a shell in emacs, similar to when you
+   are using a shell in a terminal. The exec-path is used by emacs itself to find
+   programs it needs for its features, such as spell checking, file compression,
+   compiling, grep, diff, etc. If you did set the PATH env var within emacs, you
+   probably also want to adjust your exec-path.
+   
+   e.g. add following to user-config in .spacemacs (note that we use forward slash).
+   This worked (e.g. tested with (executable-find "find")) 
+
+   (setenv "PATH" (concat "C:/Users/Mark/Documents/Git/usr/bin:" (getenv "PATH")))
+   (setq exec-path (append '("C:/Users/Mark/Documents/Git/usr/bin") exec-path))
+
+** Examining and Setting Variables
+
+   C-h v var <RET>
+   Display the value and documentation of variable var (describe-variable). 
+   
+   M-x set-variable <RET> var <RET> value <RET>
+   Change the value of variable var to value. 
+   
+   M-x apropos-variable
+   search for variable (can use reg-exp)
+
+* Text Commands
+
+  meta-q (i.e. alt-q)
+  Fill paragraph (reformat) to predefined column limit.
+  To set the column at which lines of text are broken, use the set-fill-column command. Place the
+  cursor at the column you want the line to end, and type *control-u control-x* (spacemacs: c-x f)
+  and that column will become the fill column for the current buffer. Use
+  fill-paragraph to refill the paragraph with the new fill column.
 
 * Buffer Commands
 
-C-x C-q: Toggle read-only status of buffer 
+  C-x C-q
+  Toggle read-only status of buffer 
 
 * Org Mode Commands
 
 ** Clock
 
-Org mode allows you to clock the time you spend on specific tasks in a project.
-
-C-c C-x C-i
-    Start the clock on the current item (clock-in). This inserts the CLOCK keyword together with a timestamp. When called with a C-u prefix argument, select the task from a list of recently clocked tasks.
-C-c C-x C-o
-    Stop the clock (clock-out). This inserts another timestamp at the same location where the clock was last started. It also directly computes the resulting time in inserts it after the time range as ‘=> HH:MM’.
-C-c C-x C-e
-    Update the effort estimate for the current clock task.
-C-c C-x C-q
-    Cancel the current clock. This is useful if a clock was started by mistake, or if you ended up working on something else.
-C-c C-x C-j
-    Jump to the entry that contains the currently running clock. With a C-u prefix arg, select the target task from a list of recently clocked tasks.
-C-c C-x C-r
-    Insert a dynamic block containing a clock report as an Org-mode table into the current file. When the cursor is at an existing clock table, just update it.
-
-              #+BEGIN: clocktable :maxlevel 2 :emphasize nil :scope file
-              #+END: clocktable
-
-    For details about how to customize this view, see the manual.
-C-c C-c
-    Update dynamic block at point. The cursor needs to be in the #+BEGIN line of the dynamic block. 
-C-c C-c or C-c C-y     (org-evaluate-time-range)
-    Recompute the time interval after changing one of the timestamps. 
-    This is only necessary if you edit the timestamps directly. If you change them with S-<cursor> keys, the update is automatic. 
+   Org mode allows you to clock the time you spend on specific tasks in a project.
+   
+   C-c C-x C-i
+   Start the clock on the current item (clock-in). This inserts the CLOCK keyword together with a timestamp. 
+   When called with a C-u prefix argument, select the task from a list of recently clocked tasks.
+   C-c C-x C-o
+   Stop the clock (clock-out). This inserts another timestamp at the same location where the clock was last started. It also directly computes the resulting time in inserts it after the time range as ‘=> HH:MM’.
+   C-c C-x C-e
+   Update the effort estimate for the current clock task.
+   C-c C-x C-q
+   Cancel the current clock. This is useful if a clock was started by mistake, or if you ended up working on something else.
+   C-c C-x C-j
+   Jump to the entry that contains the currently running clock. With a C-u prefix arg, select the target task from a list of recently clocked tasks.
+   C-c C-x C-r
+   Insert a dynamic block containing a clock report as an Org-mode table into the current file. When the cursor is at an existing clock table, just update it.
+   
+   #+BEGIN: clocktable :maxlevel 2 :emphasize nil :scope file
+   #+END: clocktable
+   
+   For details about how to customize this view, see the manual.
+   C-c C-c
+   Update dynamic block at point. The cursor needs to be in the #+BEGIN line of the dynamic block. 
+   C-c C-c or C-c C-y     (org-evaluate-time-range)
+   Recompute the time interval after changing one of the timestamps. 
+   This is only necessary if you edit the timestamps directly. If you change them with S-<cursor> keys, the update is automatic. 
 
 *** Clock Table (options)
 We can set e.g *:block* to absolute or relative time, today, thisweek or thismonth, etc (see block: below).
