@@ -41,7 +41,8 @@
    probably also want to adjust your exec-path.
    
    e.g. add following to user-config in .spacemacs (note that we use forward slash).
-   This worked (e.g. tested with (executable-find "find")) 
+   This worked (e.g. tested with (executable-find "find") found the correct *find* app.
+   in git bin folder) 
 
    (setenv "PATH" (concat "C:/Users/Mark/Documents/Git/usr/bin:" (getenv "PATH")))
    (setq exec-path (append '("C:/Users/Mark/Documents/Git/usr/bin") exec-path))
@@ -57,6 +58,47 @@
    M-x apropos-variable
    search for variable (can use reg-exp)
 
+* Projectile
+** Setup
+   Had problems getting indexing to work on Windows. Seems that we have to use Native indexing (elisp) that can be slow.
+   For Windows, set this in .spacemacs user-config. This should allow reliable indexing in Windows.
+
+   (setq projectile-indexing-method 'native)
+  
+** Create new Project and Enable Indexing
+   See (projectile-indexing-method 'native) above.
+   Create an empty .projectile file in top level folder, make sure file is saved.
+   Open any file (including the empty file just created!)
+
+   SPC p f
+
+   This will index project and cache results (may take some time on windows if projectile-indexing-method is set to 'native 
+   If for any reason need to rebuild cache, then reset the cache with:
+
+   SPC p I
+   
+   and then redo SPC p f
+   
+* Searching
+** Setup
+*Ripgrep*
+Download and copy to any folder the latest ripgrep for Windows (x86-64), mvsc build.
+
+https://github.com/BurntSushi/ripgrep/releases
+
+Update the variable helm-ag-base-command with location of binary. Set following in user-config:
+
+(setq helm-ag-base-command "C:\\Users\\Mark\\Documents\\ripgrep\\ripgrep-0.6.0-x86_64-pc-windows-msvc\\rg --vimgrep --no-heading")
+
+*Ag*
+Can also use Silver Searcher (Ag), but will be slower.
+
+(setq helm-ag-base-command "C:\\Users\\Mark\\Documents\\ag --vimgrep")
+  
+** Searching using Ripgrep (via helm ag, hence the 'a' below)
+
+SPC a p
+ 
 * Text Commands
 
   meta-q (i.e. alt-q)
@@ -69,10 +111,11 @@
 * Buffer Commands
 
   C-x C-q
-  Toggle read-only status of buffer 
+  Toggle read-only status of buffer. Can also set following to disregard read-only status of buffers or characters:
+  (setq inhibit-read-only t)
 
 * Org Mode Commands
-
+  
 ** Clock
 
    Org mode allows you to clock the time you spend on specific tasks in a project.
