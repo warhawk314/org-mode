@@ -10,6 +10,27 @@
 
   Meta is Alt, e.g. Meta-q is Alt-q
 
+* Projectile
+** Setup
+   Had problems getting indexing to work on Windows. Seems that we have to use Native indexing (elisp) that can be slow.
+   For Windows, set this in .spacemacs user-config. This should allow reliable indexing in Windows.
+
+   (setq projectile-indexing-method 'native)
+  
+** Create new Project and Enable Indexing
+   See (projectile-indexing-method 'native) above.
+   Create an empty .projectile file in top level folder, make sure file is saved.
+   Open any file (including the empty file just created!)
+
+   SPC p f
+
+   This will index project and cache results (may take some time on windows if projectile-indexing-method is set to 'native 
+   If for any reason need to rebuild cache, then reset the cache with:
+
+   SPC p I
+   
+   and then redo SPC p f
+
 * Environment
    
 ** Search Path
@@ -57,28 +78,6 @@
    
    M-x apropos-variable
    search for variable (can use reg-exp)
-
-* Projectile
-** Setup
-   Had problems getting indexing to work on Windows. Seems that we have to use Native indexing (elisp) that can be slow.
-   For Windows, set this in .spacemacs user-config. This should allow reliable indexing in Windows.
-
-   (setq projectile-indexing-method 'native)
-  
-** Create new Project and Enable Indexing
-   See (projectile-indexing-method 'native) above.
-   Create an empty .projectile file in top level folder, make sure file is saved.
-   Open any file (including the empty file just created!)
-
-   SPC p f
-
-   This will index project and cache results (may take some time on windows if projectile-indexing-method is set to 'native 
-   If for any reason need to rebuild cache, then reset the cache with:
-
-   SPC p I
-   
-   and then redo SPC p f
-   
 * Searching
 ** Setup
 *Ripgrep*
@@ -240,7 +239,7 @@ the text “python”, use conda search python.
 
 To create a new environment, issue:
 conda create --name snowflake python=3.6   (creates new env in /Users/mark/Documents/Python/anaconda/envs/snowflake)
-conda create --name snowflake python=3     (latest version of python)
+conda create --name snowflake python=3     (latest version of python if no dot specified)
 
 Display the environments that you have installed so far:
 conda info --envs
@@ -263,7 +262,37 @@ conda remove --name flowers --all
 
 ** Linting
 
+Need to do 2 things to enable linting:
+
+(1) For linting in Python just enable the *syntax-checking* layer in
+dotspacemacs-configuration-layers. 
 https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bcheckers/syntax-checking
 
-Spacemacs uses flake8.
-Set *syntax-checking* in dotspacemacs-configuration-layers
+The syntax-checking layer provides on the fly syntax checking using Flycheck
+(http://www.flycheck.org/en/latest). 
+
+Flycheck itself uses different linters (checkers) depending upon the buffer - hence next step.
+
+(2) *Note*_ You need to install syntax checking programs for the languages you’d like to use Flycheck with.
+depending upon the Python environment, may need to install e.g. Flake8 (using e.g. Conda),
+since PyFlake uses this tool.
+
+To find out which checker is being used by Flycheck for the buffer, issue SPC e v. 
+If everything is green, Flycheck will now start to check the buffer on the fly while you are editing. 
+
+To get extra info about a particular checker, issue SPC e h. This is useful for
+e.g. configuration of that particular checker.
+
+*** Configuration
+http://www.flycheck.org/en/latest/user/syntax-checkers.html#flycheck-checker-config-files
+
+*** Useful commands
+    SPC e c	  clear errors
+    SPC e h	  describe flycheck checker
+    SPC e l	  display a list of all the errors
+    SPC e L	  display a list of all the errors and focus the errors buffer
+    SPC e e	  explain the error at point
+    SPC e s	  set flycheck checker
+    SPC e S	  set flycheck checker executable
+    SPC e v	  verify flycheck setup
+    SPC t s	  toggle flycheck
