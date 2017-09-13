@@ -6,34 +6,16 @@
   git push origin master
   git pull origin
 
+* Good Resources
+** Org-Mode for GTD
+https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html
+
 * Basics
 
   Meta is Alt, e.g. Meta-q is Alt-q
 
-* Projectile
-** Setup
-   Had problems getting indexing to work on Windows. Seems that we have to use Native indexing (elisp) that can be slow.
-   For Windows, set this in .spacemacs user-config. This should allow reliable indexing in Windows.
-
-   (setq projectile-indexing-method 'native)
-  
-** Create new Project and Enable Indexing
-   See (projectile-indexing-method 'native) above.
-   Create an empty .projectile file in top level folder, make sure file is saved.
-   Open any file (including the empty file just created!)
-
-   SPC p f
-
-   This will index project and cache results (may take some time on windows if projectile-indexing-method is set to 'native 
-   If for any reason need to rebuild cache, then reset the cache with:
-
-   SPC p I
-   
-   and then redo SPC p f
-
-* Environment
-   
-** Search Path
+* Setup
+** Environment Search Path
    
    Evaluate (executable-find "find") to see where Emacs finds the find executable
    Evaluate (getenv "PATH") to see what PATH is setto in your Emacs environment.
@@ -67,82 +49,72 @@
 
    (setenv "PATH" (concat "C:/Users/Mark/Documents/Git/usr/bin:" (getenv "PATH")))
    (setq exec-path (append '("C:/Users/Mark/Documents/Git/usr/bin") exec-path))
+** Searching Setup (Ripgrep)
+ *Ripgrep*
+ Download and copy to any folder the latest ripgrep for Windows (x86-64), mvsc build.
 
-** Examining and Setting Variables
+ https://github.com/BurntSushi/ripgrep/releases
 
-   C-h v var <RET>
-   Display the value and documentation of variable var (describe-variable). 
-   
-   M-x set-variable <RET> var <RET> value <RET>
-   Change the value of variable var to value. 
-   
-   M-x apropos-variable
-   search for variable (can use reg-exp)
-* Searching
-** Setup
-*Ripgrep*
-Download and copy to any folder the latest ripgrep for Windows (x86-64), mvsc build.
+ Update the variable helm-ag-base-command with location of binary. Set following in user-config:
 
-https://github.com/BurntSushi/ripgrep/releases
+ (setq helm-ag-base-command "C:\\Users\\Mark\\Documents\\ripgrep\\ripgrep-0.6.0-x86_64-pc-windows-msvc\\rg --vimgrep --no-heading")
 
-Update the variable helm-ag-base-command with location of binary. Set following in user-config:
+ *Ag*
+ Can also use Silver Searcher (Ag), but will be slower.
 
-(setq helm-ag-base-command "C:\\Users\\Mark\\Documents\\ripgrep\\ripgrep-0.6.0-x86_64-pc-windows-msvc\\rg --vimgrep --no-heading")
+ (setq helm-ag-base-command "C:\\Users\\Mark\\Documents\\ag --vimgrep")
 
-*Ag*
-Can also use Silver Searcher (Ag), but will be slower.
+* Major Modes
+** Projectile
+*** Setup
+    Had problems getting indexing to work on Windows. Seems that we have to use Native indexing (elisp) that can be slow.
+    For Windows, set this in .spacemacs user-config. This should allow reliable indexing in Windows.
 
-(setq helm-ag-base-command "C:\\Users\\Mark\\Documents\\ag --vimgrep")
+    (setq projectile-indexing-method 'native)
   
-** Searching using Ripgrep (via helm ag, hence the 'a' below)
+*** Create new Project and Enable Indexing
+    See (projectile-indexing-method 'native) above.
+    Create an empty .projectile file in top level folder, make sure file is saved.
+    Open any file (including the empty file just created!)
 
-SPC a p
- 
-* Tags
-* Text Commands
+    SPC p f
 
-  meta-q (i.e. alt-q)
-  Fill paragraph (reformat) to predefined column limit.
-  To set the column at which lines of text are broken, use the set-fill-column command. Place the
-  cursor at the column you want the line to end, and type *control-u control-x* (spacemacs: c-x f)
-  and that column will become the fill column for the current buffer. Use
-  fill-paragraph to refill the paragraph with the new fill column.
+    This will index project and cache results (may take some time on windows if projectile-indexing-method is set to 'native 
+    If for any reason need to rebuild cache, then reset the cache with:
 
-* Buffer Commands
+    SPC p I
+   
+    and then redo SPC p f
 
-  C-x C-q
-  Toggle read-only status of buffer. Can also set following to disregard read-only status of buffers or characters:
-  (setq inhibit-read-only t)
-
-* Org Mode Commands
+** Org Mode Commands
   
-** Clock
+*** Clock
 
-   Org mode allows you to clock the time you spend on specific tasks in a project.
+    Org mode allows you to clock the time you spend on specific tasks in a project.
    
-   C-c C-x C-i
-   Start the clock on the current item (clock-in). This inserts the CLOCK keyword together with a timestamp. 
-   When called with a C-u prefix argument, select the task from a list of recently clocked tasks.
-   C-c C-x C-o
-   Stop the clock (clock-out). This inserts another timestamp at the same location where the clock was last started. It also directly computes the resulting time in inserts it after the time range as ‘=> HH:MM’.
-   C-c C-x C-e
-   Update the effort estimate for the current clock task.
-   C-c C-x C-q
-   Cancel the current clock. This is useful if a clock was started by mistake, or if you ended up working on something else.
-   C-c C-x C-j
-   Jump to the entry that contains the currently running clock. With a C-u prefix arg, select the target task from a list of recently clocked tasks.
-   C-c C-x C-r
-   Insert a dynamic block containing a clock report as an Org-mode table into the current file. When the cursor is at an existing clock table, just update it.
+    C-c C-x C-i
+    Start the clock on the current item (clock-in). This inserts the CLOCK keyword together with a timestamp. 
+    When called with a C-u prefix argument, select the task from a list of recently clocked tasks.
+    C-c C-x C-o
+    Stop the clock (clock-out). This inserts another timestamp at the same location where the clock was last started. It also directly computes the resulting time in inserts it after the time range as ‘=> HH:MM’.
+    C-c C-x C-e
+    Update the effort estimate for the current clock task.
+    C-c C-x C-q
+    Cancel the current clock. This is useful if a clock was started by mistake, or if you ended up working on something else.
+    C-c C-x C-j
+    Jump to the entry that contains the currently running clock. With a C-u prefix arg, select the target task from a list of recently clocked tasks.
+    C-c C-x C-r
+    Insert a dynamic block containing a clock report as an Org-mode table into the current file. When the cursor is at an existing clock table, just update it.
    
-   #+BEGIN: clocktable :maxlevel 2 :emphasize nil :scope file
-   #+END: clocktable
+    #+BEGIN: clocktable :maxlevel 2 :emphasize nil :scope file
+    #+END: clocktable
    
-   For details about how to customize this view, see the manual.
-   C-c C-c
-   Update dynamic block at point. The cursor needs to be in the #+BEGIN line of the dynamic block. 
-   C-c C-c or C-c C-y     (org-evaluate-time-range)
-   Recompute the time interval after changing one of the timestamps. 
-   This is only necessary if you edit the timestamps directly. If you change them with S-<cursor> keys, the update is automatic. 
+    For details about how to customize this view, see the manual.
+    C-c C-c
+    Update dynamic block at point. The cursor needs to be in the #+BEGIN line of the dynamic block. 
+    C-c C-c or C-c C-y     (org-evaluate-time-range)
+    Recompute the time interval after changing one of the timestamps. 
+    This is only necessary if you edit the timestamps directly. If you change them with S-<cursor> keys, the update is automatic. 
 
 *** Clock Table (options)
 We can set e.g *:block* to absolute or relative time, today, thisweek or thismonth, etc (see block: below).
@@ -181,118 +153,136 @@ absolutely, or relative to the current time and may be any of these formats:
   thisyear, lastyear, thisyear-N     a relative year
   untilnow
 http://orgmode.org/manual/The-clock-table.html
+
+** Python
+*** General
+ Python layer: https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/python
+
+ Setup Python environments using Conda, see [[conda_environment]] below for how to
+ create Python environments. We then use the pyvenv package for environment
+ selection. Spacemacs integration of virtual environments and virtualenvwrapper
+ is provided by the pyvenv package. It provides the following keybindings:
+
+ SPC m V a	activate a virtual environment in any directory
+ SPC m V d	deactivate active virtual environment
+ SPC m V w	work on virtual environment in WORKON_HOME
+
+ The variable *WORKON_HOME* should be set in .spacemacs set to the 'envs' base folder containing the Python
+ virtual environments, e.g.: 
+
+   (setenv "WORKON_HOME" "/Users/mark/Documents/Python/anaconda/envs")
+  
+ This then provides a nice way of selecting the virtual python environment.
+
+*** Conda (Anaconda)
+**** Environments  
+ #+NAME: conda_environment
+ ROOT_DIR: The directory that Anaconda or Miniconda was installed into., e.g.:
+ /Users/mark/Documents/Python/anaconda/
+
+ Python environments are installed into envs folder. e.g.:
+ /Users/mark/Documents/Python/anaconda/envs/snowflake
+
+ *To check which Python versions are available to install, run:*
+ conda search --full-name python 
+ The --full-name option lists only the packages
+ whose full name is exactly “python”. To list all packages whose names contain
+ the text “python”, use conda search python.
+
+ To create a new environment, issue:
+ conda create --name snowflake python=3.6   (creates new env in /Users/mark/Documents/Python/anaconda/envs/snowflake)
+ conda create --name snowflake python=3     (latest version of python if no dot specified)
+
+ Display the environments that you have installed so far:
+ conda info --envs
+ Conda puts an asterisk (*) in front of the active environment.
+
+ *To activate the new environment, run the appropriate command for your operating system:*
+ Linux and macOS: source activate snowflakes
+ Windows: activate snowflakes
+
+ Change your path from the current environment back to the root:
+ Linux, OS X: source deactivate
+ Windows: deactivate
+ TIP: When the environment is deactivated, its name is no longer shown in the prompt.
+
+ Make a copy of the snowflakes environment by creating a clone of it called “flowers”:
+ conda create --name flowers --clone snowflakes
+
+ Delete the flowers environment:
+ conda remove --name flowers --all
+
+*** Linting
+
+ Need to do 2 things to enable linting:
+
+ (1) For linting in Python just enable the *syntax-checking* layer in
+ dotspacemacs-configuration-layers. 
+ https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bcheckers/syntax-checking
+
+ The syntax-checking layer provides on the fly syntax checking using Flycheck
+ (http://www.flycheck.org/en/latest). 
+
+ Flycheck itself uses different linters (checkers) depending upon the buffer - hence next step.
+
+ (2) *Note*_ You need to install syntax checking programs for the languages you’d like to use Flycheck with.
+ depending upon the Python environment, may need to install e.g. Flake8 (using e.g. Conda),
+ since PyFlake uses this tool.
+
+ To find out which checker is being used by Flycheck for the buffer, issue SPC e v. 
+ If everything is green, Flycheck will now start to check the buffer on the fly while you are editing. 
+
+ To get extra info about a particular checker, issue SPC e h. This is useful for
+ e.g. configuration of that particular checker.
+
+**** Configuration
+ http://www.flycheck.org/en/latest/user/syntax-checkers.html#flycheck-checker-config-files
+
+**** Useful commands
+     SPC e c	  clear errors
+     SPC e h	  describe flycheck checker
+     SPC e l	  display a list of all the errors
+     SPC e L	  display a list of all the errors and focus the errors buffer
+     SPC e e	  explain the error at point
+     SPC e s	  set flycheck checker
+     SPC e S	  set flycheck checker executable
+     SPC e v	  verify flycheck setup
+     SPC t s	  toggle flycheck
+ 
+* General Commands
+
+  meta-q (i.e. alt-q)
+  Fill paragraph (reformat) to predefined column limit.
+  To set the column at which lines of text are broken, use the set-fill-column command. Place the
+  cursor at the column you want the line to end, and type *control-u control-x* (spacemacs: c-x f)
+  and that column will become the fill column for the current buffer. Use
+  fill-paragraph to refill the paragraph with the new fill column.
+
+  C-x C-q
+  Toggle read-only status of buffer. Can also set following to disregard read-only status of buffers or characters:
+  (setq inhibit-read-only t)
+  
+  SPC a p
+  Searching using Ripgrep (via helm ag, hence the 'a' below)
+
 ** Links
 
-If the link does not look like a URL, it is considered to be internal in the
-current file. The most important case is a link like ‘[[#my-custom-id]]’ which will
-link to the entry with the CUSTOM_ID property ‘my-custom-id’. You are
-responsible yourself to make sure these custom IDs are unique in a file.
+ If the link does not look like a URL, it is considered to be internal in the
+ current file. The most important case is a link like ‘[[#my-custom-id]]’ which will
+ link to the entry with the CUSTOM_ID property ‘my-custom-id’. You are
+ responsible yourself to make sure these custom IDs are unique in a file.
 
-Links such as ‘[[My Target]]’ or ‘[[My Target][Find my target]]’ lead to a text search in the
-current file.
+ Links such as ‘[[My Target]]’ or ‘[[My Target][Find my target]]’ lead to a text search in the
+ current file.
 
-The link can be followed with C-c C-o when the cursor is on the link, or with a
-mouse click (see Handling links). Links to custom IDs will point to the
-corresponding headline. The preferred match for a text link is a dedicated
-target: the same string in double angular brackets, like ‘<<My Target>>’.
+ The link can be followed with C-c C-o when the cursor is on the link, or with a
+ mouse click (see Handling links). Links to custom IDs will point to the
+ corresponding headline. The preferred match for a text link is a dedicated
+ target: the same string in double angular brackets, like ‘<<My Target>>’.
 
-If no dedicated target exists, the link will then try to match the exact name of
-an element within the buffer. Naming is done with the #+NAME keyword, which has
-to be put in the line before the element it refers to, as in the following
-example
+ If no dedicated target exists, the link will then try to match the exact name of
+ an element within the buffer. Naming is done with the #+NAME keyword, which has
+ to be put in the line before the element it refers to, as in the following
+ example
 
-     #+NAME: My Target
-* Python
-** General
-Python layer: https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/python
-
-Setup Python environments using Conda, see [[conda_environment]] below for how to
-create Python environments. We then use the pyvenv package for environment
-selection. Spacemacs integration of virtual environments and virtualenvwrapper
-is provided by the pyvenv package. It provides the following keybindings:
-
-SPC m V a	activate a virtual environment in any directory
-SPC m V d	deactivate active virtual environment
-SPC m V w	work on virtual environment in WORKON_HOME
-
-The variable *WORKON_HOME* should be set in .spacemacs set to the 'envs' base folder containing the Python
-virtual environments, e.g.: 
-
-  (setenv "WORKON_HOME" "/Users/mark/Documents/Python/anaconda/envs")
-  
-This then provides a nice way of selecting the virtual python environment.
-
-** Conda (Anaconda)
-*** Environments  
-#+NAME: conda_environment
-ROOT_DIR: The directory that Anaconda or Miniconda was installed into., e.g.:
-/Users/mark/Documents/Python/anaconda/
-
-Python environments are installed into envs folder. e.g.:
-/Users/mark/Documents/Python/anaconda/envs/snowflake
-
-*To check which Python versions are available to install, run:*
-conda search --full-name python 
-The --full-name option lists only the packages
-whose full name is exactly “python”. To list all packages whose names contain
-the text “python”, use conda search python.
-
-To create a new environment, issue:
-conda create --name snowflake python=3.6   (creates new env in /Users/mark/Documents/Python/anaconda/envs/snowflake)
-conda create --name snowflake python=3     (latest version of python if no dot specified)
-
-Display the environments that you have installed so far:
-conda info --envs
-Conda puts an asterisk (*) in front of the active environment.
-
-*To activate the new environment, run the appropriate command for your operating system:*
-Linux and macOS: source activate snowflakes
-Windows: activate snowflakes
-
-Change your path from the current environment back to the root:
-Linux, OS X: source deactivate
-Windows: deactivate
-TIP: When the environment is deactivated, its name is no longer shown in the prompt.
-
-Make a copy of the snowflakes environment by creating a clone of it called “flowers”:
-conda create --name flowers --clone snowflakes
-
-Delete the flowers environment:
-conda remove --name flowers --all
-
-** Linting
-
-Need to do 2 things to enable linting:
-
-(1) For linting in Python just enable the *syntax-checking* layer in
-dotspacemacs-configuration-layers. 
-https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bcheckers/syntax-checking
-
-The syntax-checking layer provides on the fly syntax checking using Flycheck
-(http://www.flycheck.org/en/latest). 
-
-Flycheck itself uses different linters (checkers) depending upon the buffer - hence next step.
-
-(2) *Note*_ You need to install syntax checking programs for the languages you’d like to use Flycheck with.
-depending upon the Python environment, may need to install e.g. Flake8 (using e.g. Conda),
-since PyFlake uses this tool.
-
-To find out which checker is being used by Flycheck for the buffer, issue SPC e v. 
-If everything is green, Flycheck will now start to check the buffer on the fly while you are editing. 
-
-To get extra info about a particular checker, issue SPC e h. This is useful for
-e.g. configuration of that particular checker.
-
-*** Configuration
-http://www.flycheck.org/en/latest/user/syntax-checkers.html#flycheck-checker-config-files
-
-*** Useful commands
-    SPC e c	  clear errors
-    SPC e h	  describe flycheck checker
-    SPC e l	  display a list of all the errors
-    SPC e L	  display a list of all the errors and focus the errors buffer
-    SPC e e	  explain the error at point
-    SPC e s	  set flycheck checker
-    SPC e S	  set flycheck checker executable
-    SPC e v	  verify flycheck setup
-    SPC t s	  toggle flycheck
+      #+NAME: My Target
