@@ -12,7 +12,21 @@ https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html
 
 * Basics
 
-  Meta is Alt, e.g. Meta-q is Alt-q
+C-z
+Toggle evil / Emacs 
+
+META
+META M stands for meta, a key that modern keyboards don’t possess but which is
+mapped to alt on Windows and Linux and option on Macs. M-x runs the smex
+command, which prompts you for the name of another command to be run.
+
+C-g
+C-g is bound to keyboard-quit (or an equivalent) by default. You use it, for
+example, to exit the minibuffer (e.g. if you type M-: which is bound to
+eval-expression and want to exit). You can replace C-g with <escape> for most
+cases (see Using Escape to Exit the Minibuffer), but it is still useful to know
+about it. If emacs freezes from a long-running command or infinite loop, you can
+use C-g to cancel it.
 
 * Setup
 ** Environment Search Path
@@ -87,7 +101,6 @@ https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html
     and then redo SPC p f
 
 ** Org Mode Commands
-  
 *** Clock
 
     Org mode allows you to clock the time you spend on specific tasks in a project.
