@@ -314,6 +314,16 @@ http://orgmode.org/manual/The-clock-table.html
   c-q <digits>
   Enter character based on its Octel code
 
+  *Regular Expressions*
+  General Rules: 
+  - Need to quote, i.e. use \ before brackets.
+  - For decimal digits use [0-9].
+  - Saving parts into (), use \1, \2 etc to reference these
+  See following example that uses quotes (\) and \1 \2 to swap two columns 
+  of digits (this expression was created by me). Note the ? means none-greedy. 
+
+  %s/\([0-9]+\).+?\([0-9]+\)/\2 help \1 
+
 ** Links
 
  If the link does not look like a URL, it is considered to be internal in the
