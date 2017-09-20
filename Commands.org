@@ -13,7 +13,7 @@ https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html
 * Basics
 
 C-z
-Toggle evil / Emacs 
+Toggle evil mode / Emacs 
 
 META
 META M stands for meta, a key that modern keyboards don’t possess but which is
@@ -271,12 +271,48 @@ http://orgmode.org/manual/The-clock-table.html
   and that column will become the fill column for the current buffer. Use
   fill-paragraph to refill the paragraph with the new fill column.
 
+  VIM command gq will do the same thing.
+
   C-x C-q
   Toggle read-only status of buffer. Can also set following to disregard read-only status of buffers or characters:
   (setq inhibit-read-only t)
   
   SPC a p
   Searching using Ripgrep (via helm ag, hence the 'a' below)
+
+  <column number> SPC SPC sort-numeric-fields
+  Sort columns based on a column numeric values.
+  Enter a prefix to the sort-numeric-fields command for the column number to sort on.
+  e.g. type '2 SPC SPC sort-numeric-fields' to sort on 2nd column.
+  Note this is generally how prefix are entered into commands - just type number first then issue command.
+  Note there are several sort commands.
+
+  SPC SPC reverse-region
+  Reverse selected region. Useful for reversing sorting
+
+  SPC h d b
+  Help describe bindings of commands. Very useful.
+
+  SPC t m c
+  Display org clock on Mode line
+
+  SPC t m t
+  Display time on Mode line
+
+  SPC SPC configuration-layer/update-packages
+  Checks if any packages to be updated, and then updates if confirmed.
+  See also paradox-list-packages
+
+  paradox-list-packages
+  Can use f u to filter for packages with updates.
+
+  c-z
+  Togggle evil-mode vs emacs-mode
+
+  c-q
+  Enter raw character (e.g. Tab)
+  c-q <digits>
+  Enter character based on its Octel code
 
 ** Links
 
