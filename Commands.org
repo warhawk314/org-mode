@@ -36,7 +36,7 @@ use C-g to cancel it.
 
    
    http://ergoemacs.org/emacs/emacs_env_var_paths.html
-  
+   
    The Windows System *PATH* tells your PC where it can find specific directories.
    This can be set in Emacs.
    
@@ -298,6 +298,9 @@ http://orgmode.org/manual/The-clock-table.html
 
   SPC t m t
   Display time on Mode line
+ 
+  SPC w b
+  Switch to mini buffer. Used if Helm breaks when losing focus
 
   SPC SPC configuration-layer/update-packages
   Checks if any packages to be updated, and then updates if confirmed.
