@@ -4,7 +4,7 @@
   https://www.github.com/warhawk314/org-mode.git
   
   git push origin master
-  git pull origin
+  git pull origin master
 
 * Good Resources
 ** Org-Mode for GTD
@@ -65,6 +65,7 @@ C-c C-f Follow Mode when using Helm
 
    (setenv "PATH" (concat "C:/Users/Mark/Documents/Git/usr/bin:" (getenv "PATH")))
    (setq exec-path (append '("C:/Users/Mark/Documents/Git/usr/bin") exec-path))
+
 ** Searching Setup (Ripgrep)
  *Ripgrep*
  Download and copy to any folder the latest ripgrep for Windows (x86-64), mvsc build.
