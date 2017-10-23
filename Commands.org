@@ -28,6 +28,8 @@ cases (see Using Escape to Exit the Minibuffer), but it is still useful to know
 about it. If emacs freezes from a long-running command or infinite loop, you can
 use C-g to cancel it.
 
+C-c C-f Follow Mode when using Helm
+
 * Setup
 ** Environment Search Path
    
@@ -273,6 +275,8 @@ http://orgmode.org/manual/The-clock-table.html
 
   VIM command gq will do the same thing.
 
+  C-c C-f Follow Mode when using Helm
+
   C-x C-q
   Toggle read-only status of buffer. Can also set following to disregard read-only status of buffers or characters:
   (setq inhibit-read-only t)
@@ -317,6 +321,12 @@ http://orgmode.org/manual/The-clock-table.html
   c-q <digits>
   Enter character based on its Octel code
 
+  SPC x a
+  General text alignment commands (works very well for e.g. alignment on decimal (use '.' option))
+
+  SPC t w
+  Toogle whitespace mode 
+
   *Regular Expressions*
   General Rules: 
   - Need to quote, i.e. use \ before brackets.
@@ -326,6 +336,30 @@ http://orgmode.org/manual/The-clock-table.html
   of digits (this expression was created by me). Note the ? means none-greedy. 
 
   %s/\([0-9]+\).+?\([0-9]+\)/\2 help \1 
+
+  *Calculator*
+  See https://github.com/SueDNymme/emacs-calc-qref/releases for very good cheat-sheets
+
+  C-x * *
+  SPC a c c
+  Start calculator
+
+  C-x * 0 (zero)
+  calc-reset
+  Reset calculator
+
+  t N
+  Current date/time on stack
+  t N F
+  Current date only on stack
+
+  t P
+  Extract date/time components
+     n = 1,2,3 year, month, or day
+     n = 4,5,6 hour, minute, or second
+     n = 7 weekday: 0=Sunday ] 6=Saturday
+     n = *8 day of year*
+     n = 9 time, as HMS form P
 
 ** Links
 
