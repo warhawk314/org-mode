@@ -11,6 +11,16 @@
 https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html
 
 * Basics
+ 
+Update spacemacs to latest development version
+
+Save any files and close emacs (server and client)
+goto C:\Users\mclements\AppData\Roaming\.emacs.d (this is original dir cloned from spacemacs "git clone https://github.com/syl20bnr/spacemacs .emacs.d")
+Switch (if not already done) to development branch: 'git checkout develop'
+Confirm (if not already done) on develop branch with 'git branch'
+Get latest develope updates with: 'git pull --rebase'
+Confirm last commits with 'git log' (compare to https://github.com/syl20bnr/spacemacs/develop) 
+Restart emacs/server
 
 C-z
 Toggle evil mode / Emacs 
