@@ -77,19 +77,54 @@ C-c C-f Follow Mode when using Helm
    (setq exec-path (append '("C:/Users/Mark/Documents/Git/usr/bin") exec-path))
 
 ** Searching Setup (Ripgrep)
- *Ripgrep*
- Download and copy to any folder the latest ripgrep for Windows (x86-64), mvsc build.
-
- https://github.com/BurntSushi/ripgrep/releases
-
- Update the variable helm-ag-base-command with location of binary. Set following in user-config:
-
- (setq helm-ag-base-command "C:\\Users\\Mark\\Documents\\ripgrep\\ripgrep-0.6.0-x86_64-pc-windows-msvc\\rg --vimgrep --no-heading")
+ 
+ See also: https://gist.github.com/pesterhazy/fabd629fbb89a6cd3d3b92246ff29779
 
  *Ag*
  Can also use Silver Searcher (Ag), but will be slower.
 
  (setq helm-ag-base-command "C:\\Users\\Mark\\Documents\\ag --vimgrep")
+
+Ripgrep is a fast search tool like grep. It's mostly a drop-in replacement for ag, also know as the Silver Searcher.
+
+helm-ag is a fantastic package for Emacs that allows you to display search results in a buffer. You can also jump to locations of matches. Despite the name, helm-ag works with ripgrep (rg) as well as with ag.
+
+**** How
+
+Download and copy to any folder the latest ripgrep.
+For Windows use (x86-64), mvsc build.
+
+https://github.com/BurntSushi/ripgrep/releases
+
+Make Spacemacs use helm-project-do-ag directly when pressing SPC / without preselecting the symbol under the cursor.
+
+Type SPC f e d to bring up ~/.spacemacs.
+
+Add following two lines (also forces ripgrep as search tool)
+
+(defun dotspacemacs/user-config ()
+  ;; ....
+ (setq helm-ag-base-command "/usr/local/Cellar/ripgrep-bin/0.7.1/bin/rg --vimgrep --no-heading --smart-case")
+ (evil-leader/set-key "/" 'spacemacs/helm-project-do-ag)
+  )
+  
+Note for windows:  (setq helm-ag-base-command "C:\\Users\\Mark\\Documents\\ripgrep\\ripgrep-0.6.0-x86_64-pc-windows-msvc\\rg --vimgrep --no-heading --smart-case")
+  
+**** Usage
+
+SPC / should allow you to search in the current project.
+
+You can prefix patterns with options
+
+-G*.cljs -w time - search for the word "time" in all .cljs files
+
+-tclojure time - search for "time" in all .{clj,cljs,cljc} files
+
+uno\ due\ tre - search for the string "uno duo tre"
+
+-C5 foo - search for "foo" but show 5 lines of context before and after the match
+
+(?:^|[^\w-])time(?:[^\w-]|$) - search for lisp-word "time", i.e. search for the full word "time" while considering "-" to be a word characer=
 
 * Major Modes
 ** Projectile
