@@ -76,6 +76,10 @@ C-c C-f Follow Mode when using Helm
    (setenv "PATH" (concat "C:/Users/Mark/Documents/Git/usr/bin:" (getenv "PATH")))
    (setq exec-path (append '("C:/Users/Mark/Documents/Git/usr/bin") exec-path))
 
+   Note on my PC at work, git is installed at:
+   C:\Program Files\Git\usr\bin
+   C:\Program Files\Git\mingw64\bin
+
 ** Searching Setup (Ripgrep)
  *Ripgrep*
  Download and copy to any folder the latest ripgrep for Windows (x86-64), mvsc build.
