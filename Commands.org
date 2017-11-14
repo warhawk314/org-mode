@@ -1,3 +1,5 @@
+#+STARTUP: indent
+
 * Notes
 
   Note that this org file is tracked in a local git repo, and has a remote github origin:
@@ -152,7 +154,58 @@ uno\ due\ tre - search for the string "uno duo tre"
    
     and then redo SPC p f
 
-** Org Mode Commands
+** Org Mode
+*** Initialization
+**** Location of org agenda files
+(setq org-agenda-files '("C:\\Users\\mclements\\Documents\\Emacs\\GTD"))
+
+**** Setup Capture Templates
+(setq org-capture-templates
+       '(("t" "Todo" entry (file+headline "~/Documents/Org/GTD.org" "Inbox")
+          "* TODO %?\n  %i\n  %a")
+         ("e" "Note" entry (file+headline "~/Documents/Org/GTD.org" "Inbox")
+          "* %?\n  %i\n")
+         ))
+
+file+headline means for the Entry object - we must define two strings, the file to insert into, and the headline to file under in that file,
+Note also the following template line starts with a * - i.e. normal syntax for org-mode top level heading.
+
+**** Setup keys
+(global-set-key (kbd "C-c o") 
+                (lambda () (interactive) (find-file "C:\\Users\\mclements\\Documents\\Emacs\\GTD\\GTD.org")))
+
+**** Setup TODO Task States
+Org mode keeps track of the state that a task is in by applying a keyword to it,
+usually something like “TODO” or “DONE.” The keyword appears at the beginning of
+every task and Org lets you cycle through them easily to track task progress.
+When you use a list of keywords that describe a progression of states, Org calls
+that a “sequence.”
+
+You can also configure multiple sequences of task states and use key bindings to
+toggle between the sequences, but I haven’t found a use for that feature myself…
+Yet.
+
+The easiest way to set your default task sequence is by setting
+org-todo-keywords, like this:
+
+(setq org-todo-keywords
+      '((sequence "Todo" "IN-PROGRESS" "WAITING" "|" "done" "CANCELED")))
+
+The observant among you will notice three things about this configuration:
+
+    It is a list of lists. This supports the multiple sequences I mentioned
+    above. My sequence starts with the symbol “sequence.” That tells Org that
+    the following items are a sequence of states rather than a list of task
+    types. One of the items is a pipe. The pipe is optional, but if it is
+    present, the task states following it will all be considered by Org to mean
+    “complete.” I use it to mark tasks as DONE or CANCELED.
+
+If you wish to configure your task states differently in each Org file, you can
+use a line like this at the top (the syntax, including the pipe, is the same):
+
+' #+TODO: TODO IN-PROGRESS WAITING | DONE CANCELED
+
+Even more about Org states is covered in Workflow states in the Org manual.
 *** Resources
 https://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
 
@@ -222,40 +275,7 @@ absolutely, or relative to the current time and may be any of these formats:
   untilnow
 http://orgmode.org/manual/The-clock-table.html
 
-*** Todo
-Org mode keeps track of the state that a task is in by applying a keyword to it,
-usually something like “TODO” or “DONE.” The keyword appears at the beginning of
-every task and Org lets you cycle through them easily to track task progress.
-When you use a list of keywords that describe a progression of states, Org calls
-that a “sequence.”
-
-You can also configure multiple sequences of task states and use key bindings to
-toggle between the sequences, but I haven’t found a use for that feature myself…
-Yet.
-
-The easiest way to set your default task sequence is by setting
-org-todo-keywords, like this:
-
-(setq org-todo-keywords
-      '((sequence "Todo" "IN-PROGRESS" "WAITING" "|" "done" "CANCELED")))
-
-The observant among you will notice three things about this configuration:
-
-    It is a list of lists. This supports the multiple sequences I mentioned
-    above. My sequence starts with the symbol “sequence.” That tells Org that
-    the following items are a sequence of states rather than a list of task
-    types. One of the items is a pipe. The pipe is optional, but if it is
-    present, the task states following it will all be considered by Org to mean
-    “complete.” I use it to mark tasks as DONE or CANCELED.
-
-If you wish to configure your task states differently in each Org file, you can
-use a line like this at the top (the syntax, including the pipe, is the same):
-
-' #+TODO: TODO IN-PROGRESS WAITING | DONE CANCELED
-
-Even more about Org states is covered in Workflow states in the Org manual.
-
-**** Commands
+*** Commands
 Press t on a task to cycle its current state (e.g. from “TODO” to “IN-PROGRESS,” etc.)
 S-<right>/<left>
     Select the following/preceding TODO state, similar to cycling.
@@ -277,8 +297,6 @@ C-c a t
     If you wish to configure your task states differently in each Org file, you can use a line like this at the top (the syntax, including the pipe, is the same):
 
     #+TODO: TODO IN-PROGRESS WAITING | DONE CANCELED
-
-
 
 ** Python
 *** General
