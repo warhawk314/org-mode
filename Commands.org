@@ -238,6 +238,20 @@ https://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
     This is only necessary if you edit the timestamps directly. If you change them with S-<cursor> keys, the update is automatic. 
 
 *** Clock Table (options)
+C-c C-x C-r     (org-clock-report)
+    Insert a dynamic block (see Dynamic blocks) containing a clock report as an
+    Org mode table into the current file. When the cursor is at an existing
+    clock table, just update it. When called with a prefix argument, jump to the
+    first clock report in the current document and update it. The clock table
+    always includes also trees with :ARCHIVE: tag.
+C-c C-c or C-c C-x C-u     (org-dblock-update)
+    Update dynamic block at point. The cursor needs to be in the #+BEGIN line of the dynamic block.
+C-u C-c C-x C-u
+    Update all dynamic blocks (see Dynamic blocks). This is useful if you have several clock table blocks in a buffer.
+S-<left>
+S-<right>     (org-clocktable-try-shift)
+    Shift the current :block interval and update the table. The cursor needs to be in the #+BEGIN: clocktable line for this command. If :block is today, it will be shifted to today-1 etc. 
+
 We can set e.g *:block* to absolute or relative time, today, thisweek or thismonth, etc (see block: below).
 For block of more than one day we can set interval using :step day/week 
 Examples:
