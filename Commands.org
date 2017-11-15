@@ -289,12 +289,44 @@ absolutely, or relative to the current time and may be any of these formats:
   untilnow
 http://orgmode.org/manual/The-clock-table.html
 
+*** Recurring Events
+http://orgmode.org/manual/Repeated-tasks.html
+
+ [2017-01-15 Sun] day
+ [2017-01-15 Sun 12:19] time
+ [2017-01-15 Sun 12:19-15:00] time period
+ [2017-01-15 Sun]-[2017-01-17 Tue] date period
+ [2017-01-15 Sun]--[2017-01-17 Tue] date period (alternative style)	  
+
+ [2008-02-10 Sun ++1w]
+ Marking this DONE will shift the date by at least one week,
+ but also by as many weeks as it takes to get this date into
+ the future.  However, it stays on a Sunday, even if you called
+ and marked it done on Saturday.
+
+ [2008-02-08 Fri 20:00 ++1d]
+ Marking this DONE will shift the date by at least one day, and
+ also by as many days as it takes to get the timestamp into the
+ future.  Since there is a time in the timestamp, the next
+ deadline in the future will be on today's date if you
+ complete the task before 20:00.
+
+ [2005-11-01 Tue .+1m]
+ Marking this DONE will shift the date to one month after
+ today.
+
+However, for many standard recurring events (like +1w) and for everything advanced where I'd need sexp expressions,
+I do prefer a different approach: M-x org-clone-subtree-with-time-shift 
+
 *** Commands
 Press t on a task to cycle its current state (e.g. from “TODO” to “IN-PROGRESS,” etc.)
+
 S-<right>/<left>
     Select the following/preceding TODO state, similar to cycling.
+
 C-c / t
     View TODO items in a sparse tree (see Sparse trees). Folds the buffer, but shows all TODO items and the headings hierarchy above them.
+
 C-c a t
     Show the global TODO list. Collects the TODO items from all agenda files (see Agenda Views) into a single buffer. See Global TODO list, for more information. 
     Note: need to define folder of org files or individual org files, define variable org-agenda-files, e.g.:
@@ -311,6 +343,10 @@ C-c a t
     If you wish to configure your task states differently in each Org file, you can use a line like this at the top (the syntax, including the pipe, is the same):
 
     #+TODO: TODO IN-PROGRESS WAITING | DONE CANCELED
+
+C-c C-z
+    Add a time-stamped note to the LOGBOOK drawer. 
+    See also (setq org-log-into-drawer t)
 
 ** Python
 *** General
