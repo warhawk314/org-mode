@@ -1,0 +1,102 @@
+* QA
+** ISO
+
+ISO 9000 – Fundamentals and Vocabulary, which introduces the basic principles underlying management systems and explains
+the terminology
+
+ISO 9001 – Requirements, which specifies the criteria for certification
+
+ISO 9004 – Guidelines for performance improvements goes beyond ISO 9001 by identifying how ISO 9001 can be used as a
+springboard for improving the efficiency and effectiveness of a quality management system
+
+Annex SL was designed as the common structure for ISO Management System Standards.
+When Annex SL is used for ISO 9001:2015 the terms and definitions document that applies is ISO 9000:2015. 
+To understand IOS 9001 you must also understand ISO 9000.
+
+*** Quality Management System (QMS) 
+
+A quality management system (QMS) is a formalized system that documents
+processes, procedures, and responsibilities for achieving quality policies and
+objectives. A QMS helps coordinate and direct an organization’s activities to
+meet customer and regulatory requirements and improve its effectiveness and
+efficiency on a continuous basis.
+
+ISO 9001:2015, the international standard specifying requirements for quality
+management systems, is the most prominent approach to quality management
+systems.
+
+While some use the term QMS to describe the ISO 9001 standard or the group of
+documents detailing the QMS, it actually refers to the entirety of the system.
+The documents only serve to describe the system.
+
+Quality management systems serve many purposes, including:
+
+    Improving processes
+    Reducing waste
+    Lowering costs
+    Facilitating and identifying training opportunities
+    Engaging staff
+    Setting organization-wide direction
+
+*** Princibles
+
+ISO 9000 deals with the fundamentals of quality management systems, including the eight management principles upon which
+the family of standards is based:
+
+Principle 1 – Customer focus
+
+Organizations depend on their customers and therefore should understand current and future customer needs, should meet
+customer requirements and strive to exceed customer expectations.
+
+Principle 2 – Leadership
+
+Leaders establish unity of purpose and direction of the organization. They should create and maintain the internal
+environment in which people can become fully involved in achieving the organization's objectives.
+
+Principle 3 – Involvement of people
+
+People at all levels are the essence of an organization and their full involvement enables their abilities to be used
+for the organization's benefit.
+
+Principle 4 – Process approach
+
+A desired result is achieved more efficiently when activities and related resources are managed as a process.
+
+Principle 5 – System approach to management
+
+Identifying, understanding and managing interrelated processes as a system contributes to the organization's
+effectiveness and efficiency in achieving its objectives.
+
+Principle 6 – Continual improvement
+
+Continual improvement of the organization's overall performance should be a permanent objective of the organization.
+
+Principle 7 – Factual approach to decision making
+
+Effective decisions are based on the analysis of data and information.
+
+Principle 8 – Mutually beneficial supplier relationships
+
+An organization and its suppliers are interdependent and a mutually beneficial relationship enhances the ability of both
+to create value.
+
+ISO 9001 deals with the requirements that organizations wishing to meet the standard must fulfill.
+
+*** PDCA 
+
+Planning, Do, Check, Act.
+PDCA is an improvement model which is essential to ISO 9001.
+
+Planning -> leadership, Planning, (Support)
+Do       -> (Support), Operation
+Check    -> Performance Evaluation
+Act      -> Improvement
+
+*** Verification vs Validation
+
+Each of these steps is important in the design process because they serve two distinct functions. *Verification* is a
+theoretical exercise designed to make sure that no requirements are missed in the design, whereas *validation* is a
+practical exercise that ensures that the product, as built, will function to meet the requirements. Together, they
+ensure that the product designed will satisfy the customer needs, and the needs of the customer are one of the key
+focuses for ISO 9001 and improving Customer Satisfaction.
+
