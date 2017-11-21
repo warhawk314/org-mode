@@ -471,7 +471,7 @@ C-c C-z
   Note there are several sort commands.
 
   SPC SPC reverse-region
-  Reverse selected region. Useful for reversing sorting
+  Reverse selected region. Useful for reversing sorting.
 
   SPC h d b
   Help describe bindings of commands. Very useful.
