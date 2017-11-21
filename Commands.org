@@ -461,7 +461,7 @@ C-c C-z
   (setq inhibit-read-only t)
   
   SPC a p
-  Searching using Ripgrep (via helm ag, hence the 'a' below)
+  Searching using Ripgrep (via helm ag, hence the 'a' below).
 
   <column number> SPC SPC sort-numeric-fields
   Sort columns based on a column numeric values.
