@@ -477,7 +477,7 @@ C-c C-z
   Help describe bindings of commands. Very useful.
 
   SPC t m c
-  Display org clock on Mode line
+  Display org clock on Mode line.
 
   SPC t m t
   Display time on Mode line
