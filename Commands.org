@@ -461,7 +461,7 @@ C-c C-z
   (setq inhibit-read-only t)
   
   SPC a p
-  Searching using Ripgrep (via helm ag, hence the 'a' below)
+  Searching using Ripgrep (via helm ag, hence the 'a' below).
 
   <column number> SPC SPC sort-numeric-fields
   Sort columns based on a column numeric values.
@@ -471,13 +471,13 @@ C-c C-z
   Note there are several sort commands.
 
   SPC SPC reverse-region
-  Reverse selected region. Useful for reversing sorting
+  Reverse selected region. Useful for reversing sorting.
 
   SPC h d b
   Help describe bindings of commands. Very useful.
 
   SPC t m c
-  Display org clock on Mode line
+  Display org clock on Mode line.
 
   SPC t m t
   Display time on Mode line
