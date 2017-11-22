@@ -1,5 +1,56 @@
+#+STARTUP: indent
+* General
+** PC
+*** Org Mode Files 
+| [[C:\\Users\\mclements\\Documents\\Emacs\\GTD]] | (note this folder is backed-up, see above) |
+| [[file:c:/Users/mclements/Documents/Emacs/Commands.org][Commands.org]]                                | (General emacs ref, saved to Github        |
+
+*** Backups
+Backups are done on PC using the Task Scheduler
+- Search Window: Task Scheduler
+- Select (on left): Task Scheduler Library
+- Select task: 'Backup Org Files (MC)'
+- Select Properties (bottom right)
+- See tab Triggers when the backups are run every day
+- Uses script: [[file:c:/Users/mclements/Documents/Python%20Scripts/Backup.py]]
+    source_folder = [[C:\\Users\\mclements\\Documents\\Emacs\\GTD]]
+    backup_folder = [[P:\\GAIAMDS\\Documentation\\ETC\\Backup\\MC\\Org]]
+see https://blogs.esri.com/esri/arcgis/2013/07/30/scheduling-a-scrip/
+
+* Gaia 
+** CFIs
+*** DARC
+In case the DARC PDG Gen (i.e. the process that consolidates VC2) get stuck - i.e. the LCT does not move
+forward then do the following:
+- try restarting the PDG processes and DARC (note DARC Vader will start PDGs automatically if PDGs are down)
+If this does not help, then try to clear the DARC queue with:
+- Stop DARC Vader
+- Stop DARC MMI.
+- Stop DARC and the three PDG processes.
+- Clear consolidation queue - log in to mysql as user admin and password  (in gaiaops account on gaialta):
+  mysql –u admin –verbose –p<various> –P 3308 –h 127.0.0.1  (note no gap between -p and various!, in the 'Various'(!) file search for admin and 3308)
+- Then in mysql prompt:
+  use DARC_DB;
+  select * from QUEUE_FILL_PARAMETER_TBL;
+  delete  from QUEUE_FILL_PARAMETER_TBL;
+- Restart eveything
+
+In the PDG Gen log we should see packets being extracted with increasing times, also the LCT should be
+moving forward.
+
+Note if we need to rewind the LCT then:
+- Stop DARC Vader
+- Start DARC MMI
+- On left select DataArchive_SCOS/Data spaces/<active DB> - right click
+- Change Start Time (or End Time?) and presss LCT button
+- Start DARC Vader
 * QA
-** ISO
+** Links
+*** Quality Assurance (SharePoint)
+https://projects.telespazio-vega.de/quality-assurance/_layouts/15/start.aspx#/
+*** EILS Project Audit Documents (SharePoint) 
+https://projects.telespazio-vega.de/quality-assurance/_layouts/15/start.aspx#/SitePages/Home.aspx?RootFolder=%2Fquality%2Dassurance%2FShared%20Documents%2FOCEILS16%20audit&FolderCTID=0x012000CD3C007CA329AF48A01B5BDFE14BBB78&View=%7B6104C8F2%2D4EC0%2D495A%2DAF3C%2DBD4C06A05635%7D
+** ISO Standards Notes and References
 
 ISO 9000 – Fundamentals and Vocabulary, which introduces the basic principles underlying management systems and explains
 the terminology
@@ -13,21 +64,20 @@ Annex SL was designed as the common structure for ISO Management System Standard
 When Annex SL is used for ISO 9001:2015 the terms and definitions document that applies is ISO 9000:2015. 
 To understand IOS 9001 you must also understand ISO 9000.
 
+Note the following provides a good overview in the context of the security industry:
+<<iso_clauses_overview_pdf>> file:C:\Users\mclements\Documents\Projects\QA\Reference\Annex-A-Step-by-Step-Guide-for-ISO-9001-2015-NG-FG-AG.pdf
+
 *** Quality Management System (QMS) 
+    
+A quality management system (QMS) is a formalized system that documents processes, procedures, and responsibilities for
+achieving quality policies and objectives. A QMS helps coordinate and direct an organization’s activities to meet
+customer and regulatory requirements and improve its effectiveness and efficiency on a continuous basis.
 
-A quality management system (QMS) is a formalized system that documents
-processes, procedures, and responsibilities for achieving quality policies and
-objectives. A QMS helps coordinate and direct an organization’s activities to
-meet customer and regulatory requirements and improve its effectiveness and
-efficiency on a continuous basis.
+ISO 9001:2015, the international standard specifying requirements for quality management systems, is the most prominent
+approach to quality management systems.
 
-ISO 9001:2015, the international standard specifying requirements for quality
-management systems, is the most prominent approach to quality management
-systems.
-
-While some use the term QMS to describe the ISO 9001 standard or the group of
-documents detailing the QMS, it actually refers to the entirety of the system.
-The documents only serve to describe the system.
+While some use the term QMS to describe the ISO 9001 standard or the group of documents detailing the QMS, it actually
+refers to the entirety of the system. The documents only serve to describe the system.
 
 Quality management systems serve many purposes, including:
 
@@ -37,7 +87,7 @@ Quality management systems serve many purposes, including:
     Facilitating and identifying training opportunities
     Engaging staff
     Setting organization-wide direction
-
+    
 *** Princibles
 
 ISO 9000 deals with the fundamentals of quality management systems, including the eight management principles upon which
@@ -92,6 +142,150 @@ Do       -> (Support), Operation
 Check    -> Performance Evaluation
 Act      -> Improvement
 
+*** ISO Clauses
+Common clause numbers.
+See [[iso_clauses_overview_pdf]]
+
+**** 1--3 admin clauses, background, scope
+**** 4: Context: what's happing in the business environment of a company.
+
+Internal abd External issues and parties. Document conext of the company. Regular monitor and review. Laws and
+regulatory rules. Consider issues arising from its social, technological, environmental, ethical, political, legal, and
+economic environment. Changes in technology. Economic shifts in the organisation’s market.
+
+All this information is known by the managing directors, founders, CEOs and other members of management but may never
+have been documented. The collation and documentation of this information can be very valuable and demonstrate where you
+stand as an organisation.
+
+Organisations must clearly define what they sell, including products and services. Link this to the relevant standards
+that they are governed by.
+
+The standard requires the organisation to establish a *process-based management system*.
+
+*Process* The process is a set of interrelated activities that transform activity inputs into outputs. For example,
+Installation: The process of converting a box of components into a working security system.
+
+*Process approach* Process approach is a management strategy that requires organisations to manage its processes and the
+interactions between them. Thus you need to consider each major process of the company and their supporting processes.
+
+All processes have:
+- inputs;
+- outputs;
+- operational control;
+- appropriate measurement & monitoring.
+
+Each process will have support processes that underpin and enable the process to become realised.
+
+#+DOWNLOADED: file:C%3A/Users/mclements/Documents/Emacs/GTD/Images/QA_Processes_2.PNG @ 2017-11-20 15:33:28
+[[file:ISO Clauses/QA_Processes_2_2017-11-20_15-33-28.PNG]]
+
+#+DOWNLOADED: file:C%3A/Users/mclements/Documents/Emacs/GTD/Images/QA_Processes.PNG @ 2017-11-20 15:31:50
+[[file:ISO Clauses/QA_Processes_2017-11-20_15-31-50.PNG]]
+
+Questions to ask:
+- What are the inputs to the process?
+- Where do the inputs come from?
+- What are the outputs to the process?
+- Where do the outputs go to?
+- Is there an effective inter-relationship between processes?
+- Who plans the process?
+- Who conducts the process?
+- Are responsibilities and authorities defined?
+- Who monitors and measures the process?
+- What resources are required for the process? - Materials, people, information,
+environment, infrastructure, etc.
+- What documented information is required for the operation and control over the
+process?
+- What competences & training are required?
+- What awareness and knowledge is required?
+- What methods are used to control and run the process?
+- What are the risks and opportunities for the process?
+- What happens when the process goes wrong or does not yield the correct output
+or result?
+- How can the process be improved?
+- Is the process part of the management review process?
+- Is the process subject to internal audit?
+The answers to the questions above form the basis of the process, its control, measurement and improvement.
+
+**** 5: Leadership (management involvement)
+The top management is required to ensure that:
+- the requirements set out in ISO 9001:2015 are met;
+- QMS processes are delivering their intended outcomes;
+- reporting on the operation of the QMS and identifying any opportunities for improvement is taking place;
+- a customer focus is promoted throughout the organisation;
+- whenever changes to the QMS are planned and implemented, the integrity of the system is maintained.
+- write policy: Quality policy, company induction, basic training, tool box talks.
+
+Policy - Tell everyone about it.
+- Making sure it is written.
+- Making sure people know it and understand it.
+- Giving it to people who have an interest in your business (e.g. clients / suppliers / manufacturers / staff).
+- Publishing it on your website.
+
+**** 6: Risk based planning (in broadest possible sense, anything that can go wrong)
+Clause 6.1.1 - Actions to address risks and opportunities
+- When thinking about the business and service delivery, it’s about ensuring that the system you use it right for this.
+  This could include anything from the way in which you sell, to the technology you use in the office.
+- Doing extra to make sure the outcome is better than you had hoped for.
+- Putting safety measures in place to ensure things don’t go wrong, training for staff, supervision, margins that are
+  realistic which means you can rival your competitor but still remain profitable.
+- Actually get better at what you are doing, selling providing, servicing, etc.
+
+Clause 6.2 - Quality objectives and planning to achieve them
+Ensure that whatever objectives you implement they are SMART
+- Specific
+- Measurable
+- Achievable
+- Realistic
+- Time bound
+
+Clause 6.3 – Planning of changes
+When a business changes something, the impact of the change needs to be considered before a change is made.
+
+**** 7: Support
+Resources needed to run management system, external providers (info needed), contractors, equipment, hardware, software.
+People having the right info
+The organisation needs to decide what tools it uses to measure business performance. It also needs to consider whether
+these tools will give them everything they need as a result.
+Communication.
+Documented information
+Remembering that to the extent necessary:
+a) maintain documented information to support the operation of its processes (i.e. procedures, etc.);
+b) retain documented information to have confidence that the processes are being carried out as planned (i.e. records).
+
+**** 8: Operation
+Businesses are expected that, once they have done their planning for what they are going to sell, they then plan the
+detail of how this can be done operationally.
+- Set up supplier accounts / trade accounts.
+- Purchase stock.
+- Ensure staff have correct skills and understand the process.
+- Purchase tools and vehicles.
+- Make sure you have enough staff.
+- Issue clear instructions, drawings, procedures risk assessments to enable them to do the job.
+ 
+customer reqs, reviewing reqs, design and development, managing external providers (products and services from them),
+what u do as a business, main thing you deliver. Deliver what we set out to deliver.
+
+**** 9. Performance evaluation
+How we measure success of business (effectives).
+What are the key indicators suggesting business is working, targets being
+achieved. *Internal auditing*. Management review.
+
+**** 10. Improvement: continual improvement, Correction (fixing a problem),
+Corrective action (do that it does not happen again). Fixing action.
+improvement is the spirit of IOS 9001 (and Annex SL)
+When something goes wrong you must:
+a) react to it:
+ 1) do something / take action / fix it;
+ 2) deal with the impact it had (e.g. upset customer).
+b) evaluate what went wrong to prevent it happening again and check there are not other similar issues that could happen.
+Key now is to update risks and opportunities.
+
+It might be that, during a review, the control measures within a process are insufficient and do not give the level of
+assurance perhaps that the Directors want to know that processes are being followed correctly, e.g. sales process does
+not include a deadline or record of when a quote is sent out so you do not have clear idea of how productive your team
+are being.
+
 *** Verification vs Validation
 
 Each of these steps is important in the design process because they serve two distinct functions. *Verification* is a
@@ -99,4 +293,12 @@ theoretical exercise designed to make sure that no requirements are missed in th
 practical exercise that ensures that the product, as built, will function to meet the requirements. Together, they
 ensure that the product designed will satisfy the customer needs, and the needs of the customer are one of the key
 focuses for ISO 9001 and improving Customer Satisfaction.
-
+** Audit Notes 
+*** Dictionary
+Conformity
+ISO 9000 uses conformity as fulfilling either process or product requirements.
+ISO 9000 defines nonconformity as the non-fulfillment of a requirement. It doesn’t define
+compliance.
+The ISO 9000:2000 Fundamentals and Vocabulary standard defines conformity as the
+fulfillment of a requirement. A note says conformance is synonymous, but
+deprecated (meaning use of that term is considered obsolete). 
