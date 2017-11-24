@@ -2,8 +2,8 @@
 * General
 ** PC
 *** Org Mode Files 
-| [[C:\\Users\\mclements\\Documents\\Emacs\\GTD]] | (note this folder is backed-up, see above) |
-| [[file:c:/Users/mclements/Documents/Emacs/Commands.org][Commands.org]]                                | (General emacs ref, saved to Github        |
+| [[C:\\Users\\mclements\\Documents\\Emacs\\GTD]] | Note this folder is backed-up, see above |
+| [[file:c:/Users/mclements/Documents/Emacs/Commands.org][Commands.org]]                                | General emacs ref, saved to Github       |
 
 *** Backups
 Backups are done on PC using the Task Scheduler
@@ -293,12 +293,40 @@ theoretical exercise designed to make sure that no requirements are missed in th
 practical exercise that ensures that the product, as built, will function to meet the requirements. Together, they
 ensure that the product designed will satisfy the customer needs, and the needs of the customer are one of the key
 focuses for ISO 9001 and improving Customer Satisfaction.
-** Audit Notes 
-*** Dictionary
+** Dictionay
 Conformity
-ISO 9000 uses conformity as fulfilling either process or product requirements.
-ISO 9000 defines nonconformity as the non-fulfillment of a requirement. It doesn’t define
-compliance.
-The ISO 9000:2000 Fundamentals and Vocabulary standard defines conformity as the
-fulfillment of a requirement. A note says conformance is synonymous, but
-deprecated (meaning use of that term is considered obsolete). 
+ISO 9000 uses conformity as fulfilling either process or product requirements. ISO 9000 defines nonconformity
+as the non-fulfillment of a requirement. It doesn’t define compliance. The ISO 9000:2000 Fundamentals and Vocabulary
+standard defines conformity as the fulfillment of a requirement. A note says conformance is synonymous, but deprecated
+(meaning use of that term is considered obsolete).
+
+Quality Planning
+Quality Planning is a systematic process that translates quality policy into measurable objectives and requirements, and
+lays down a sequence of steps for realising them within a specified timeframe. This is achieved for a product or service
+in the form of a Quality Assurance Plan. Qualit y planning is a mandatory activity in all projects in our company.
+
+Project Quality Engineer (PQE)
+A Project Quality Engineer ( PQE ) who are responsible for ensuring the Quality Requirements specified in the applicable
+contract are implemented satisfactorily within a project .
+
+IMS (TPZV)
+The requirements imposed by the Integrated Management System ( IMS ) which is certified by DNV GL as satisfying the
+requirements of ISO 9001:2008 (Certificate 122233 - 2012 - AQ - GBR - UKAS) shall be addressed and implemented as
+appropriate to the individual s ervic e project .
+
+TPZV Generic QAP for Service Projects
+The requirements imposed by the Integrated Management System (IMS) which is certified by DNV GL as satisfying the
+requirements of ISO 9001:2008 (Certificate 122233 - 2012 - AQ - GBR - UKAS) shall be addressed and implemented as
+appropriate to the individual service project.
+The Quality Plan addresses those generic requirements of a service project and relate s them to the overall management
+system (= IMS) processes. It also identifies the role of Quality Assurance and the associated activities to be performed
+to ensure the contract conditions are met. As such, t he generic QA Plan shall also form the basis for internal and/or
+external audits of service contracts, in the absence of individual, project - specific Quality Assurance Plans. Please r
+efer to section 5.1 for more information.
+My interpretation: We do internal Audits to check adherance of projects to TPZV's IMS; ESOC do their own
+Audits to check again ESOC's QMS. This Generic QAP if for the former.
+
+Limit of Liability (LoL) 
+Some TPZV service projects follow a so-called Time & Materials ( T&M ) cost model. This means the contracted value is
+based on a daily or hourly rate and can either have a Limit of Liability ( LoL ) defined by the Client or is open 
+ended and dependant on the work undertaken.
