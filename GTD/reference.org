@@ -46,10 +46,34 @@ Note if we need to rewind the LCT then:
 - Start DARC Vader
 * QA
 ** Links
+*** IMS
+[[https://ims.telespazio-vega.de/default.aspx][IFMS]]
+[[https://ims.telespazio-vega.de/Lists/Company%20Processes/AllItems.aspx][Processes]]
+[[https://ims.telespazio-vega.de/_layouts/15/listform.aspx?PageType=4&ListId=%7B64683E94%2D1136%2D4D15%2D8AA9%2D9C3A615603C9%7D&ID=73&ContentTypeID=0x01008038F27BE2BF28429F74134A247F25A1][Quality Audit Process]]
+
 *** Quality Assurance (SharePoint)
 https://projects.telespazio-vega.de/quality-assurance/_layouts/15/start.aspx#/
-*** EILS Project Audit Documents (SharePoint) 
+
+*** Audit Planning – Functions and Projects
+https://projects.telespazio-vega.de/quality-assurance/Shared%20Documents/Audit%20programme%202017.xlsx 
+
+List of document and processes to be reviewed
+Please add anything that crops up that you think could do with a closer look.
+https://projects.telespazio-vega.de/quality-assurance/Shared%20Documents/Documents%20and%20Processes%20to%20be%20reviewed.xlsx 
+
+Other tasks are added to the SP tasks, CD likes to have all the important QA relevant meetings in the calendar. 
+If you want a hand with Q-Pulse, let me know. 
+
+*** ISO 9001 Document
+[[file:V:\Standards\ISO\ISO 9001\ISO_9001_2015_Quality management systems - requirements.PDF][ISO_9001_2015_Quality]]
+
+*** Q-Pulse 
+electronic quality management system
+
+*** Projects
+**** EILS Project Audit Documents (SharePoint) 
 https://projects.telespazio-vega.de/quality-assurance/_layouts/15/start.aspx#/SitePages/Home.aspx?RootFolder=%2Fquality%2Dassurance%2FShared%20Documents%2FOCEILS16%20audit&FolderCTID=0x012000CD3C007CA329AF48A01B5BDFE14BBB78&View=%7B6104C8F2%2D4EC0%2D495A%2DAF3C%2DBD4C06A05635%7D
+
 ** ISO Standards Notes and References
 
 ISO 9000 – Fundamentals and Vocabulary, which introduces the basic principles underlying management systems and explains
@@ -330,3 +354,10 @@ Limit of Liability (LoL)
 Some TPZV service projects follow a so-called Time & Materials ( T&M ) cost model. This means the contracted value is
 based on a daily or hourly rate and can either have a Limit of Liability ( LoL ) defined by the Client or is open 
 ended and dependant on the work undertaken.
+
+Quality Record 
+Quality record is any document or form providing objective
+evidence that activities have been performed or results have been achieved on
+the project, in accordance with requirements. In order to make them readily
+identifiable and retrievable, quality records will be kept under configuration
+control (local and/or centralised, according to their objec tives).
