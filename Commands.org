@@ -43,6 +43,73 @@ use C-g to cancel it.
 C-c C-f Follow Mode when using Helm
 
 * Setup
+** Optimised Emacs Binaries for Windows 10
+http://emacsbinw64.sourceforge.net
+E.g. “w64 25.2 O2 with Modules”
+
+** Location of .emacs.d (home PC) 
+C:\Users\Mark\AppData\Roaming\.emacs.d
+
+** Download Adobe Source Code Pro Fonts and Install (Windows 10) 
+Open the fonts directory with Win-r , shell:fonts
+
+Goto the Adobe GitHub location:
+https://github.com/adobe-fonts/source-code-pro/releases
+Version I successfully used (July 19 2016)
+https://github.com/adobe-fonts/source-code-pro/releases/tag/2.030R-ro%2F1.050R-it
+Download “Source code” (zip), and unpack it
+Goto OTF directory
+Copy all font files to the fonts folder (see above, requires Admin) privilege.
+	TTF: TrueType fonts
+	OTF: OpenType fonts (slightly more advanced)
+
+** Install Spacemacs 
+Follow instructions, but is simply removing (or make backup) of .emacs.d (see above) then git clone of spacemacs to .emacs.d
+Then start emacs as normal.
+Install the normal Spacemacs (note the base version, not sripped down version).
+https://simpletutorials.com/c/2758/How+to+Install+Spacemacs+on+Windows
+
+** EMACS Server Setup on Windows 10 
+In your Emacs/bin directory (where your Emacs binaries are) create a shortcut to runemacs.exe. You may right-click on file runemacs.exe and choose send-to desktop (create shortcut).
+Right click on newly created shortcut and choose Properties. In Target put following: 
+
+	"X:\path\to\emacs\bin\runemacs.exe" --daemon  (note the quotes disappeared for me after reopening the ShortCut Properties)
+
+Close the properties dialog.
+Press Win+r to open Run dialog and type shell:startup.
+
+Copy your newly created link to Emacs server into opened directory. Emacs will start up automatically next time you
+start the system. Double click on the shortcut to start Emacs server now if it is not already running (to test next
+step).
+
+*** To Start Emacs Client
+In your Emacs/bin directory, create a new shortcut file to emacsclientw.exe. Open Properties for newly created shortcut and in Target type:
+
+	X:\path\to\emacs\bin\emacsclientw.exe -n -c
+
+In Start in field, type %Documents% or whatever your choice for default directory is. Close the Properties dialog and
+rename your shortcut to just: emacs Drag your newly created shortcut to your startbar, taskbar, or desktop or wherever
+you wish to have it.
+
+OBS: No need to edit your .emacs file and add server line to it.
+Note that in Windows Task Manager, you can see the Emacs Server process, and also any Emacs Clients.
+
+Works on Windows 10, Emacs version “w64 25.2 O2 with Modules” (from http://emacsbinw64.sourceforge.net)
+https://www.emacswiki.org/emacs/EmacsMsWindowsIntegration#toc7
+
+*** Associate Windows File to Emacs Client
+In the emacs bin folder, create a short cut to :\path\to\emacs\bin\emacsclientw.exe -n -c as described above. Name of short cut is not important.
+
+Right Click Windows / Control Panel / Programs / Default Programs / Make a file type always open a specific program
+Select file type, Select Change program, More Apps - select “GNU EmacsClient” if already in scroll box. 
+If not in scroll box then scroll all way down and select “Look for another app on this PC”. 
+Select the above short cut in the emacs bin folder to macsclientw.exe -n -c
+
+*** Send to Context Menu
+Press Win+r and in Run dialog type shell:sendto. 
+Copy your newly created shortcut to the emacs client t(i.e. targeting …emacsclientw.exe -n -c) to the sendto folder that just opened. 
+Call the short cut Emacs. This will create an entry in send to context menu so you can right click on any document and choose to open it in Emacs.
+
 ** Environment Search Path
    
    Evaluate (executable-find "find") to see where Emacs finds the find executable
