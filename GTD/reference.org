@@ -5,7 +5,7 @@
 | [[C:\\Users\\mclements\\Documents\\Emacs\\GTD]] | Note this folder is backed-up, see above |
 | [[file:c:/Users/mclements/Documents/Emacs/Commands.org][Commands.org]]                                | General emacs ref, saved to Github       |
 
-*** Backups
+*** Backups (Org)
 Backups are done on PC using the Task Scheduler
 - Search Window: Task Scheduler
 - Select (on left): Task Scheduler Library
@@ -17,10 +17,55 @@ Backups are done on PC using the Task Scheduler
     backup_folder = [[P:\\GAIAMDS\\Documentation\\ETC\\Backup\\MC\\Org]]
 see https://blogs.esri.com/esri/arcgis/2013/07/30/scheduling-a-scrip/
 
+*** Q-Pulse 
+PC Application - Press Start Windows, Type/Start Q-Pulse
+<<Q-Pulse>> Group IS (Micheal Muller) informed that I can use my Windows Account to login
+Just start the App, don't normally need to login.
+**** Q-Pulse Workflow
+General:
+- use F5 to refresh Q-Pulse screens
+- *don't forget to save regularly*
+***** Create New Audit - File / New Audit  
+Top Right - Title, press small button containing 3 small dots 
+    (Example here is a service project at ESOC (OCEILS16 - Estrack ILS services @ ESOC(Projects\)) - Select Search For, Product Service, Projects, <the project name> 
+    Make sure that the project number (e.g. PRO-133) is consistent with those on the G-Drive:
+      [[G:\PMO\04 QA\AUDITING\Internal Audits]] 
+Enter Scheduled Start and end times (also Actual Times)
+Enter Auditor and Auditee
+Scope should be set automatically
+
+***** Create Checklist (questions to be asked)
+On Checklists form, select Add "Checklist"
+Add new question: just type into "add an item to the checlist" and press return
+Note - that can use section headers (just enter section header text and press return, double click on section header
+and set "Mark as Scetion header"), and rearrange using arrow keys
+Press OK at end, and then save
+
 * Gaia 
 ** CFIs
 *** DARC
-In case the DARC PDG Gen (i.e. the process that consolidates VC2) get stuck - i.e. the LCT does not move
+**** Explanation of DUDs (marked yellow in DashBoard)
+
+Yellow is 'nominal'. 3 3ypes:
+
+1) 'dud' - I think this is where CPD returns 0 data, even though there is data there. Normally this stops the Cons, but
+   with DARC Vader this is seen, and the Cons re-submitted, So above each 'dud' row you should see an identical Window
+   Start/End range that works.
+
+2) in 2 cases the 'pace' is above the nominal range (pace is how much faster than realtime the Cons TM is processed).
+   These 2 could be false positives where the is a lot less data to process than usual, so the Cons. finishes faster !!
+   The expected range was set based on experience: if what we see 4.25 and 4.83 are really OK, then we could raise the
+   expected fastest speed to Yellow=5.0)
+
+3) PC: third case and these faster jobs may be a result of that. The job seems to partially finish before re-submitted
+   by DARC Vader (I assume) only from the point it failed at. So not really a dud, but a "partial job" where the end
+   time is the same but the start time later. See the examples below.
+
+#+DOWNLOADED: file:C%3A/Users/mclements/Documents/Emacs/GTD/Images/DARC_Dud_Jobs.png @ 2017-12-07 15:28:50
+[[file:Gaia/DARC_Dud_Jobs_2017-12-07_15-28-50.png]]
+
+**** In case the DARC PDG Gen (i.e. the process that consolidates VC2) get stuck - i.e. the LCT does not move
+
 forward then do the following:
 - try restarting the PDG processes and DARC (note DARC Vader will start PDGs automatically if PDGs are down)
 If this does not help, then try to clear the DARC queue with:
@@ -44,12 +89,23 @@ Note if we need to rewind the LCT then:
 - On left select DataArchive_SCOS/Data spaces/<active DB> - right click
 - Change Start Time (or End Time?) and presss LCT button
 - Start DARC Vader
+
 * QA
 ** Links
+*** Q-Pulse 
+PC application - electronic Quality Management System
+See [[Q-Pulse]]
 *** IMS
 [[https://ims.telespazio-vega.de/default.aspx][IFMS]]
-[[https://ims.telespazio-vega.de/Lists/Company%20Processes/AllItems.aspx][Processes]]
+**** IFMS Processes Links
+[[https://ims.telespazio-vega.de/Lists/Company%20Processes/AllItems.aspx][IFMS Processes]]
 [[https://ims.telespazio-vega.de/_layouts/15/listform.aspx?PageType=4&ListId=%7B64683E94%2D1136%2D4D15%2D8AA9%2D9C3A615603C9%7D&ID=73&ContentTypeID=0x01008038F27BE2BF28429F74134A247F25A1][Quality Audit Process]]
+[[https://ims.telespazio-vega.de/Lists/Company%20Processes/DispForm.aspx?ID=36&RootFolder=%2A][Control Of Nonconforming Product]]
+[[https://ims.telespazio-vega.de/Lists/Company%20Processes/DispForm.aspx?ID=80][Corrective Actions / Preventive Actions]] (also includes links at bottom to Create, Process and Approve/Close CA/PA Record)
+[[https://ims.telespazio-vega.de/Lists/Company%20Processes/Legacy%20Mapping.aspx][Legacy Mapping]] 
+
+*** Auditing Folder (G Drive) 
+[[G:\PMO\04 QA\AUDITING\Internal Audits]]
 
 *** Quality Assurance (SharePoint)
 https://projects.telespazio-vega.de/quality-assurance/_layouts/15/start.aspx#/
@@ -66,14 +122,17 @@ If you want a hand with Q-Pulse, let me know.
 
 *** ISO 9001 Document
 [[file:V:\Standards\ISO\ISO 9001\ISO_9001_2015_Quality management systems - requirements.PDF][ISO_9001_2015_Quality]]
-
-*** Q-Pulse 
-electronic quality management system
-
 *** Projects
 **** EILS Project Audit Documents (SharePoint) 
 https://projects.telespazio-vega.de/quality-assurance/_layouts/15/start.aspx#/SitePages/Home.aspx?RootFolder=%2Fquality%2Dassurance%2FShared%20Documents%2FOCEILS16%20audit&FolderCTID=0x012000CD3C007CA329AF48A01B5BDFE14BBB78&View=%7B6104C8F2%2D4EC0%2D495A%2DAF3C%2DBD4C06A05635%7D
-
+*** Useful Links
+**** Audit Reports
+See [[https://ims.telespazio-vega.de/Lists/Company%20Processes/DispForm.aspx?ID=73&ContentTypeId=0x01008038F27BE2BF28429F74134A247F25A1][Audit Process]] "Audit Reports 
+Also:
+http://www.exemplarglobalcollege.org/how-to-report-your-audit-findings/
+** Tools 
+*** Q-Pulse
+See [[Q-Pulse]]
 ** ISO Standards Notes and References
 
 ISO 9000 – Fundamentals and Vocabulary, which introduces the basic principles underlying management systems and explains
@@ -361,3 +420,25 @@ evidence that activities have been performed or results have been achieved on
 the project, in accordance with requirements. In order to make them readily
 identifiable and retrievable, quality records will be kept under configuration
 control (local and/or centralised, according to their objec tives).
+
+Corrective and Preventive Actions
+A corrective action deals with a nonconformity that has occurred, and a preventive action addresses the potential for a
+nonconformity to occur.
+
+   Definitions: (From ISO 9000)
+   Corrective Action
+   
+   The action to eliminate the cause of a detected nonconformity or other undesirable situation.
+   NOTE 1 There can be more than one cause for a nonconformity.
+   NOTE 2 Corrective action is taken to prevent recurrence whereas preventive action is taken to prevent occurrence.
+   NOTE 3 There is a distinction between correction and corrective action.
+   
+   Preventive Action
+   The action to eliminate the cause of a potential nonconformity or other undesirable potential situation
+   NOTE 1 There can be more than one cause for a potential nonconformity.
+   NOTE 2 Preventive action is taken to prevent occurrence whereas corrective action is taken to prevent recurrence.
+   
+   Correction
+   The action to eliminate a detected nonconformity
+   NOTE 1 A correction can be made in conjunction with a corrective action.
+   NOTE 2 A correction can be, for example, rework or regrade.
