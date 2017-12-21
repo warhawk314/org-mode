@@ -415,6 +415,12 @@ C-c C-z
     Add a time-stamped note to the LOGBOOK drawer. 
     See also (setq org-log-into-drawer t)
 
+*** File References 
+[[]][] Normal form for full URL. First part URL, 2nd part name (optional). Allows spaces in URL. 
+<<>> Text ID that can be looked up in a [[]] token. Used to skip to a place in local file.
+
+URL Types (http://orgmode.org/manual/External-links.html):
+- file+sys: use OS to open URL file
 ** Python
 *** General
  Python layer: https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/python

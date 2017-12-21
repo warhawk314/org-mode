@@ -40,10 +40,88 @@ Add new question: just type into "add an item to the checlist" and press return
 Note - that can use section headers (just enter section header text and press return, double click on section header
 and set "Mark as Scetion header"), and rearrange using arrow keys
 Press OK at end, and then save
+** TPZ 
+*** How to Book Meeting Room
+Outlook Calendar, check which meetings rooms are free
+Outlook Calendar, New Items - Meeting
+  Press Rooms.. button (wait several seconds)
+    Select Room
+  Select Recipents (i.e. invited people, also select myself (to check invite goes out))
+  Note: both Room and Invited peoples should appear in the To listing
+  Write Subject !!
+  Write in general text box (normally same as tital)
+  Press Send
+  Confirm in Calendar rooms that booking has been booked.
 
+After Invite has been sent, can verify people have accepted invite:
+  Outlook / Calendar
+  Double click on booked meeting room/time
+  Scheduling Assistent
+  Confirm on left "All Attendees"
+
+*** Telefunk 
+[[https://telefunk.telespazio-vega.de/Pages/Home.aspx][Telefunk]]
+   [[https://telefunk.telespazio-vega.de/supportservices/timerecording/Pages/Home.aspx][Timesheets]]
+*** Replicon 
+https://na1.replicon.com/TelespazioVega/main.aspx
+*** Forms
+[[https://telefunk.telespazio-vega.de/supportservices/timerecording/Documents/Request%20for%20carryover%20or%20payment%20of%20holidays_engl%20deu.dotx][Request for Carryover or payment of holidays]]
+[[https://ims.telespazio-vega.de/BMS%20Reference/Works%20Agreement_Regulation%20of%20Company%20Holidays.pdf][Company Holidays]]
+*** Holidays 
+**** 2018 
+***** Company Holidays 
+[[https://telefunk.telespazio-vega.de/supportservices/humanResources/benefits/Pages/Office-staff-company-days-2018.aspx][Company Holidays]]
 * Gaia 
+** Documentation 
+*** Super OOL
+system where subset of Mission OOLs get forwarded to a central alarm for any
+SPACON on the Science Missions Control Room (Gaia/Integral/XMM)
+[[Q:\GAIAMDS\CFIs\GMMS]]
 ** CFIs
-*** DARC
+See individual LOGBOOK for update details
+
+*** MCS D3.6.5 based on S2K 5.4.15 (plus EFRs)
+*** FARC 2.1.7 (plus EFRs)
+*** SMF 2.4.0 (plus EFRs)
+*** SMF S2K 5.4.21 (plus EFRs and Gaia specific updates)
+*** ECS/LMS 1.0.8 
+*** MATIS 2.5.11
+[[file+sys:P:\GAIAMDS\Documentation\SWS\Spacon MCS Procedures\D01 - GAIA-ESC-TN-0097 (Gaia MATIS Operational Concept i1r0draft).docx]]
+*** SLE API 3.4.0 
+*** DARC 2.5.0p2
+:LOGBOOK:
+- Note taken on [2017-12-19 Di 14:57] \\
+  Hi GAIA SwS, 
+  
+  With DARC-614 we are aiming at further optimising the DARC delete operations. The optimisation as defined in the investigation, will be valid only for scheduled delete jobs for all parameters (manual delete jobs will remain as they are now). I know that in GAIA you are not using the schedule delete features but triggering the delete via Darc vader. For that reason, could you please confirm that the delete jobs would be identified by the system as scheduled delete jobs and therefore be able to benefit from the optimisation to be provided by this SCR? 
+  
+  Thanks for the clarification. 
+  
+  Cheers, 
+  Rui
+- Note taken on [2017-12-19 Di 14:49] \\
+  Gaia LTA now running latest DARC-660 patch:
+  SK 19/12/17: BTW I called this version 2.5.0p2 (the previous version allowing fast data deletion was called 2.5.0p1, tracked by CR-373).
+- Note taken on [2017-12-19 Di 11:27] \\
+  Dear all,
+  
+  I have patched gaialta with the same patch as has been tested on gaialtb over the last few weeks.
+  
+  (For those not in the Gaia Weekly FCT Meeting today my crontab killing of the PDGs (restarted by DARC Vader) has created
+  several hits of an Ongoing Consolidation and Live TM at the same time, and the DARC has logged them and recovered
+  correctly).
+  
+  I also followed the relevant sections of GND-GO-0010 and restarted the EDDS Servers, ARES and WebMUST.
+  
+  We will see how tonight's Consolidation goes !
+  
+  (@Pete: I suggest we leave the SPACONs doing the Dump Acks on *both* LTA machines, at least till the end of the week,
+  just to provide a reference in case we see any Consolidation anomaly on gaialta.)
+  
+  Regards, Simon
+- Note taken on [2017-12-11 Mo 11:04] \\
+  Checked with Simon
+:END:
 **** Explanation of DUDs (marked yellow in DashBoard)
 
 Yellow is 'nominal'. 3 3ypes:
@@ -90,8 +168,78 @@ Note if we need to rewind the LCT then:
 - Change Start Time (or End Time?) and presss LCT button
 - Start DARC Vader
 
+**** Explanation of DARC/PDG Patch to prevent Unintentional Jump Forward 
+Note: patch installed first on gaialtb, then on gaialta (19/12/17)
+
+Hi Simon, 
+
+Just to clarify on the observation reported in this email. Even after the patch,
+the consolidation can prematurely stop if the retrieval from S2K provides a
+packet outside the consolidation time range (even if there is a jump larger than
+the max allowed by configuration) since the main objective of the patch was to
+prevent updates to the LCT that would cause gaps in the data. If the
+consolidation stops prematurely without updating the LCT, this should not cause
+a gap and the interval (in case there was really missing data) would be
+populated with the next consolidation. We could introduce a similar approach for
+the package data received from S2K (based on the package time) however this
+would introduce yet another level of complexity with limited benefits (from the
+tests this scenario didn't seem to happen very often and would not cause a data
+gap).
+
+@Nick: feel free to correct me in case my knowledge of the final version of the
+patch is incorrect.
+
+Cheers, 
+Rui 
+
+**** DARC Delete Jobs 
+Perfect. This would mean GAIA could benefit from this SCR immediate without any further update to Darc vader. 
+
+Cheers, 
+Rui 
+
+----
+
+Hi Rui,
+
+I can confirm that the Delete jobs are logged as "TYPE: SCHEDULED_DELETE_DYNAMIC_DATA".
+
+Regards, Simon
+
+----
+
+Hi GAIA SwS, 
+
+With DARC-614 we are aiming at further optimising the DARC delete operations.
+The optimisation as defined in the investigation, will be valid only for
+scheduled delete jobs for all parameters (manual delete jobs will remain as they
+are now). I know that in GAIA you are not using the schedule delete features but
+triggering the delete via Darc vader. For that reason, could you please confirm
+that the delete jobs would be identified by the system as scheduled delete jobs
+and therefore be able to benefit from the optimisation to be provided by this
+SCR?
+
+Thanks for the clarification. 
+*** DABYS FW 1.5/S2K-DM 1.4
+*** EDDS 1.5.0 
+*** ARES 1.3.0 
+*** EUD 2.4 (used by the PUS displays) 
+*** EUD TM Desktop (controlled by FCT)
+*** MCCM 4.0.1 
+*** MPS D2.0.0 
+The MPS release D3.0.0 is currently under finalisation for delivery.
+** Dates 
+*** Mission Lifetime (SPC Meeting)
+During its meeting at ESA Headquarters in Paris, on 21-22 November, the SPC approved indicative extensions for the
+continued operation of five ESA-led missions: Gaia, INTEGRAL, Mars Express, SOHO, and XMM-Newton. This followed a
+comprehensive review of the current operational status and outlook of the missions and their expected scientific returns
+during the extension period. The decision will be subject to confirmation towards the end of 2018.
+
+The lifetime of Gaia, ESA's billion star surveyor, was extended by eighteen months, from 25 July 2019 to 31
+December 2020. This is the first time that Gaia, which was launched in 2013 and originally funded for a five-year
+mission, has been subject to the extension process.
 * QA
-** Links
+** Documentation
 *** Q-Pulse 
 PC application - electronic Quality Management System
 See [[Q-Pulse]]
@@ -372,10 +520,52 @@ are being.
 *** Verification vs Validation
 
 Each of these steps is important in the design process because they serve two distinct functions. *Verification* is a
-theoretical exercise designed to make sure that no requirements are missed in the design, whereas *validation* is a
-practical exercise that ensures that the product, as built, will function to meet the requirements. Together, they
+_theoretical_ exercise designed to make sure that no requirements are missed in the design, whereas *validation* is a
+_practical_ exercise that ensures that the product, as built, will function to meet the requirements. Together, they
 ensure that the product designed will satisfy the customer needs, and the needs of the customer are one of the key
 focuses for ISO 9001 and improving Customer Satisfaction.
+
+**** Verification
+ISO/IEC 15288:2008:
+The purpose of the Verification Process is to confirm that the specified design
+requirements are fulfilled by the system. 
+
+This process provides the information required to effect the remedial actions
+that correct non‐conformances in the realized system or the processes that act
+on it.
+
+INCOSE:
+The Verification Process confirms that the system‐of‐interest and all its
+elements perform their intended functions and meet the performance requirements
+allocated to them (i.e., that the system has been built right). Verification
+methods include inspection, analysis, demonstration, and verification and are
+discussed in more detail below. Verification activities are determined by the
+perceived risks, safety, and criticality of the element under consideration.
+
+--
+
+System verification ensures that the system, its elements, and its interfaces
+conform to their requirements; in other words that “you built it right.”
+Verification encompasses the tasks, actions, and activities performed to
+evaluate the progress and effectiveness of the evolving system solutions
+(people, products, and process) and to measure compliance with requirements. The
+primary purpose of verification is to determine that system specifications,
+designs, processes, and products are compliant with requirements. A *continuous*
+feedback of verification data helps to reduce risk and to surface problems
+early. The goal is to completely verify system capability to meet all
+requirements prior to production and operation stages. Problems uncovered at in
+these stages are very costly to correct (see Figure 2‐4). As such, early
+discovery of deviations from requirements reduces overall project risk and helps
+the project deliver a successful, low‐cost system.29 Verification results are an
+important element of decision gate reviews.
+
+Verification analysis can be initiated once a design concept has been
+established. If an RVTM is used, each requirement has a verification activity
+associated with it. A unique requirements identifier can be used for
+traceability to the verification plans, verification procedures, and
+verification reports to provide a closed loop Verification Process from
+demonstrated capability back to the requirement.
+
 ** Dictionay
 Conformity
 ISO 9000 uses conformity as fulfilling either process or product requirements. ISO 9000 defines nonconformity
@@ -395,7 +585,7 @@ contract are implemented satisfactorily within a project .
 IMS (TPZV)
 The requirements imposed by the Integrated Management System ( IMS ) which is certified by DNV GL as satisfying the
 requirements of ISO 9001:2008 (Certificate 122233 - 2012 - AQ - GBR - UKAS) shall be addressed and implemented as
-appropriate to the individual s ervic e project .
+appropriate to the individual servic or project.
 
 TPZV Generic QAP for Service Projects
 The requirements imposed by the Integrated Management System (IMS) which is certified by DNV GL as satisfying the
@@ -415,11 +605,10 @@ based on a daily or hourly rate and can either have a Limit of Liability ( LoL )
 ended and dependant on the work undertaken.
 
 Quality Record 
-Quality record is any document or form providing objective
-evidence that activities have been performed or results have been achieved on
-the project, in accordance with requirements. In order to make them readily
-identifiable and retrievable, quality records will be kept under configuration
-control (local and/or centralised, according to their objec tives).
+Quality record is any document or form providing objective evidence that activities have been performed or results have
+been achieved on the project, in accordance with requirements. In order to make them readily identifiable and
+retrievable, quality records will be kept under configuration control (local and/or centralised, according to their
+objec tives).
 
 Corrective and Preventive Actions
 A corrective action deals with a nonconformity that has occurred, and a preventive action addresses the potential for a
@@ -442,3 +631,22 @@ nonconformity to occur.
    The action to eliminate a detected nonconformity
    NOTE 1 A correction can be made in conjunction with a corrective action.
    NOTE 2 A correction can be, for example, rework or regrade.
+
+** INCOSE 
+[[V:\STANDARDS\INCOSE]]
+
+The objective of the International Council on Systems Engineering (INCOSE)
+Systems Engineering Handbook is to provide a description of key process
+activities performed by systems engineers. The intended audience is the new
+systems engineer, an engineer in another discipline who needs to perform
+systems engineering (SE), or an experienced systems engineer who needs a
+convenient reference.
+* EGS-CC 
+** Documentation 
+[[https://projects.telespazio-vega.de/egs-cc/Deliverable%20Documents1/a-egscc-releases/doc/EGSCC-SYS-SRelD-1014-SoftwareReleaseDocumentIR3.docx][Software Release Document IR 3]] 
+*** SDE
+[[https://projects.telespazio-vega.de/egs-cc/Released%20Documents/2017-08-23%20Integration%20Release%202%20Delta%202%20Hotfix%201/egscc-sde/doc/ddf/EGSCC-SDE-SUM-1001-SDEUserManualVol1ContinuousIntegrationandDeveloperEnvironments-I1R5.pdf][SDE User Manual, Vol. 1: Continuous Integration and Developer Environments]] 
+** Booking Codes 
+VV TEX Valdiation Test Execution and Evaluation - KPJ77966.IVT
+- test installation of SDE environment on [[gedappl10]]
+
