@@ -145,7 +145,7 @@ See individual LOGBOOK for update details
 - Note taken on [2017-12-11 Mo 11:04] \\
   Checked with Simon
 :END:
-**** Explanation of DUDs (marked yellow in DashBoard)
+**** Explanation of DUDs (marked yellow in DashBoard) + Dashboard Jobs Display
 
 Yellow is 'nominal'. 3 3ypes:
 
@@ -164,6 +164,13 @@ Yellow is 'nominal'. 3 3ypes:
 
 #+DOWNLOADED: file:C%3A/Users/mclements/Documents/Emacs/GTD/Images/DARC_Dud_Jobs.png @ 2017-12-07 15:28:50
 [[file:Gaia/DARC_Dud_Jobs_2017-12-07_15-28-50.png]]
+
+NOTE !!
+
+4/1/18: The Dashboard is currently configured to show *all* jobs for the last 3
+days, but for days 4-10 it only shows the *Yellow/Red* entries, not the OK ones
+! (If you want to check the older OK ones, you scroll back to an older Dashboard
+page.)
 
 **** In case the DARC PDG Gen (i.e. the process that consolidates VC2) get stuck - i.e. the LCT does not move
 

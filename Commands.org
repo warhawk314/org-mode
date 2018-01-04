@@ -519,7 +519,7 @@ URL Types (http://orgmode.org/manual/External-links.html):
      SPC e S	  set flycheck checker executable
      SPC e v	  verify flycheck setup
      SPC t s	  toggle flycheck
-** Eshell 
+** Eshell + Shell 
 Use plink.exe (plink) within eshell (or emacs shell) to connect to other Linux
 boxes instead of using ssh (for Windows). Note that plink.exe is a separate
 program delivered with PuTTY. The path of PuTTY executables (including plink) should
@@ -547,6 +547,10 @@ Just type alias to see all defined aliases.
 Multiple Eshells 
 Use the 'Universal Number' in Spacemacs, i.e. SPC u, then invoke a new eshell as
 normal. This will create a new eshell instance.
+
+Problems
+Note that we cannt seem to get command history on local (remote) shell.
+Maybe best to use shell (emacs). Alternatively, Tramp can also work with remote shells.
 
 * General Commands
 
