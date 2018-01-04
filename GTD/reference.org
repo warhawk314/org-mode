@@ -77,6 +77,29 @@ https://na1.replicon.com/TelespazioVega/main.aspx
 system where subset of Mission OOLs get forwarded to a central alarm for any
 SPACON on the Science Missions Control Room (Gaia/Integral/XMM)
 [[Q:\GAIAMDS\CFIs\GMMS]]
+*** FOP Procedures 
+[[P:\GAIAMDS\Documentation\SWS\Spacon MCS Procedures\FOP_fromESOC][FOP Ground Procedures]]
+
+Possibly interesting Procedures:
+GND-MC-1001: manual re-population of data from the MCS PARC through the DARC to ARES/WebMUST
+
+GND-MC-1002: defines the steps required to fix common issues that can
+sporadically occur on various applications of a client workstation or server.
+
+GMD-MC-1006: Gaia Leap Second Handling
+
+GND-MC-0001: This procedure defines all steps required to start (and stop) the Gaia MCS server(s) and client(s).
+It is assumed the workstations are completely logged out at the beginning of the setup procedure.
+
+GND-GO-0010: This procedure defines the steps required confirm the mission control system configuration is
+setup as expected after a database distribution is completed.
+
+GND-MC-0006:
+This procedure provides the required steps to replay TM from one data stream on another one using the TM
+Replayer functionality of TM Spacon. An example use case is replaying 2002 data on data stream 1002 in case of
+an incomplete ONLC VC2 archive. Since the verifier does not consider S1 packets being received on the offline
+stream, this functionality enables the user to consolidate TC verification states.
+
 ** CFIs
 See individual LOGBOOK for update details
 
@@ -223,6 +246,19 @@ Thanks for the clarification.
 *** DABYS FW 1.5/S2K-DM 1.4
 *** EDDS 1.5.0 
 *** ARES 1.3.0 
+**** ARES Failed Parameter Import
+Example with failed import of parameter in temporary 'ID' folder 637867 (as shown in Dashboard failed ARES import section): 
+
+login to PES (gaiadds)
+cd ARES_import  (ARES_import is a softlink to -> /mysqldb/others/ARES_HADOOP_IMPORT/import)
+cd parameter
+
+mv failed/637867/BatchRequest.Param.GAIA_HK.0.2017.359.18.05.28.970@2017.359.18.05.29.745.1.dat .
+rm -rf failed/637867
+
+This will create a temporary 'camel lock' file in the folder - ARES will reimport the parameter after couple of minutes,
+Failed folder should remain empty after the new import,
+
 *** EUD 2.4 (used by the PUS displays) 
 *** EUD TM Desktop (controlled by FCT)
 *** MCCM 4.0.1 
@@ -646,6 +682,11 @@ convenient reference.
 [[https://projects.telespazio-vega.de/egs-cc/Deliverable%20Documents1/a-egscc-releases/doc/EGSCC-SYS-SRelD-1014-SoftwareReleaseDocumentIR3.docx][Software Release Document IR 3]] 
 *** SDE
 [[https://projects.telespazio-vega.de/egs-cc/Released%20Documents/2017-08-23%20Integration%20Release%202%20Delta%202%20Hotfix%201/egscc-sde/doc/ddf/EGSCC-SDE-SUM-1001-SDEUserManualVol1ContinuousIntegrationandDeveloperEnvironments-I1R5.pdf][SDE User Manual, Vol. 1: Continuous Integration and Developer Environments]] 
+** Git 
+e.g.: git clone -b master  https://egscc.telespazio-vega.de/git/r/egscc/egscc-sde.git 
+
+Note: Use Windows credentials
+Note: Git URL (see Annex A, page 126, SDE SUM): egscc.telespazio-vega.de/git/r/egscc 
 ** Booking Codes 
 VV TEX Valdiation Test Execution and Evaluation - KPJ77966.IVT
 - test installation of SDE environment on [[gedappl10]]

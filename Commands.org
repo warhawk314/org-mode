@@ -274,6 +274,7 @@ use a line like this at the top (the syntax, including the pipe, is the same):
 
 Even more about Org states is covered in Workflow states in the Org manual.
 *** Resources
+http://spacemacs.org/layers/+emacs/org/README.html
 https://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
 
 *** Clock
@@ -415,6 +416,9 @@ C-c C-z
     Add a time-stamped note to the LOGBOOK drawer. 
     See also (setq org-log-into-drawer t)
 
+Shift Left/Right
+    Toggle TODO status
+
 *** File References 
 [[]][] Normal form for full URL. First part URL, 2nd part name (optional). Allows spaces in URL. 
 <<>> Text ID that can be looked up in a [[]] token. Used to skip to a place in local file.
@@ -515,7 +519,35 @@ URL Types (http://orgmode.org/manual/External-links.html):
      SPC e S	  set flycheck checker executable
      SPC e v	  verify flycheck setup
      SPC t s	  toggle flycheck
- 
+** Eshell 
+Use plink.exe (plink) within eshell (or emacs shell) to connect to other Linux
+boxes instead of using ssh (for Windows). Note that plink.exe is a separate
+program delivered with PuTTY. The path of PuTTY executables (including plink) should
+be defined in the path variables for spacemacs startup (see .spacemacs).
+
+Example: start eshell, then e.g. 'plink -l gedappl10' 
+
+Note that normal completion does not seem to work, instead can use ALT-/
+
+In eshell (EVIL):
+- Insert - to type in remote shell commands
+- ESC to enable normal buffer editing in shell output and moving around, also
+  switch to other Windows (can also switch to another window with: C-x w
+  <number>)
+
+Aliases
+The eshell aliases are stored in a file whose name is in the variable
+eshell-aliases-file (this defaults to "c:/Users/mclements/AppData/Roaming/.emacs.d/eshell/alias").
+Everytime alias is defined in the eshell then this file is automatically updated (i.e. aliases
+are persistent).
+e.g. alias ll 'ls -l $*' 
+
+Just type alias to see all defined aliases.
+
+Multiple Eshells 
+Use the 'Universal Number' in Spacemacs, i.e. SPC u, then invoke a new eshell as
+normal. This will create a new eshell instance.
+
 * General Commands
 
   meta-q (i.e. alt-q)
