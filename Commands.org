@@ -552,8 +552,22 @@ Problems
 Note that we cannt seem to get command history on local (remote) shell.
 Maybe best to use shell (emacs). Alternatively, Tramp can also work with remote shells.
 
-* General Commands
+Shell
+M-x shell gives you /bin/bash or /bin/sh on Linux. You can make it use your
+preferred alternative shell by M-x customize-variable explicit-shell-file-name.
 
+** Term
+If you just want a repl for emacs lisp, try M-x ielm. Enter (describe-mode) for documentation.
+
+M-x shell gives you /bin/bash or /bin/sh on Linux. You can make it use your
+preferred alternative shell by M-x customize-variable explicit-shell-file-name.
+
+M-x term gives you a complete terminal emulator running your default shell.
+You'll want this for interactive programs which use the features of a terminal
+emulator. Learn the keybindings to switch between term-line-mode and
+term-char-mode; you'll need them.
+* General Commands
+** General
   meta-q (i.e. alt-q)
   Fill paragraph (reformat) to predefined column limit.
   To set the column at which lines of text are broken, use the set-fill-column command. Place the
@@ -649,8 +663,28 @@ Maybe best to use shell (emacs). Alternatively, Tramp can also work with remote 
      n = *8 day of year*
      n = 9 time, as HMS form P
 
-** Links
+  Encrypt Files
+  Just save the org-file as .gpg and Emacs will encrypt it.
+  File will be opened in org-mode 
 
+  Open file in Dired
+  - method 1 (simplest) : Goto dired mode. Select file. SPC f o will open the file in native application.
+  - method 2 : C-c C-x (in helm-find-files). Open with external App. If you use helm-find-files, C-c C-x prompts for an
+  external application from the list of all applications seen by Emacs. Once you
+  choose, helm-find-files remembers that choice the next time you open file of
+  that type until you run the command with prefix argument (C-u), then you will
+  be prompted again (see next paragraph). Can use OpenWith.exe (with maybe
+  default argument) to select OS application.
+  Note by using C-u in front of the C-c C-x then you will be prompted again for command default. 
+
+  Delete all Dired buffers
+  M-x ibuffer
+  * / to mark buffers in dired mode.
+  D to delete them.
+
+** Links
+[[file+emacs:G:\PMO\04 QA\AUDITING\Internal Audits\PRO-133 - Project Audit OCEILS16 - Estrack ILS services @ ESOC\Pictures]]
+---
  If the link does not look like a URL, it is considered to be internal in the
  current file. The most important case is a link like ‘[[#my-custom-id]]’ which will
  link to the entry with the CUSTOM_ID property ‘my-custom-id’. You are
@@ -670,3 +704,53 @@ Maybe best to use shell (emacs). Alternatively, Tramp can also work with remote 
  example
 
       #+NAME: My Target
+
+[[]][] Normal form for full URL. First part URL, 2nd part name (optional). Allows spaces in URL. 
+<<>> Text ID that can be looked up in a [[]] token. Used to skip to a place in local file.
+
+URL Types (http://orgmode.org/manual/External-links.html):
+- file+sys: use OS to open URL file
+- file+emacs: Folder will be opened in Emacs (dired)
+  Note useful - if then SPC f f will enter helm-find-files and can use C-c and
+  C-x to open file in OS application.
+  *Alernatively:* open file in Spacemacs (e.g. via SPC f f) and then SPC f o. This will open file in native application !
+
+** Cheat Sheet (most important commands) 
+
+  SPC t m c
+  Display org clock on Mode line.
+
+  SPC t m t
+  Display time on Mode line
+ 
+  SPC w b
+  Switch to mini buffer. Used if Helm breaks when losing focus
+
+  C-c C-z
+  Add a time-stamped note to the LOGBOOK drawer. 
+  See also (setq org-log-into-drawer t)
+
+  C-x C-I
+  Indent
+
+  file+emacs: (link tag)
+  Folder will be opened in Emacs (dired view). Note useful - if then SPC f f will
+  enter helm-find-files and can use C-c and C-x to open file in OS application.
+
+  Open file in Dired
+  - method 1 (simplest) : Goto dired mode. Select file. SPC f o will open the file in native application.
+  - method 2 : C-c C-x (in helm-find-files). Open with external App. If you use helm-find-files, C-c C-x prompts for an
+  external application from the list of all applications seen by Emacs. Once you
+  choose, helm-find-files remembers that choice the next time you open file of
+  that type until you run the command with prefix argument (C-u), then you will
+  be prompted again (see next paragraph). Can use OpenWith.exe (with maybe
+  default argument) to select OS application.
+  Note by using C-u in front of the C-c C-x then you will be prompted again for command default. 
+
+  Encrypt Files
+  Just save the org-file as .gpg and Emacs will encrypt it.
+
+  Delete all Dired buffers
+  M-x ibuffer
+  * / to mark buffers in dired mode.
+  D to delete them.
