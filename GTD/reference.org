@@ -68,7 +68,10 @@ After Invite has been sent, can verify people have accepted invite:
 
 *** Telefunk 
 [[https://telefunk.telespazio-vega.de/Pages/Home.aspx][Telefunk]]
-   [[https://telefunk.telespazio-vega.de/supportservices/timerecording/Pages/Home.aspx][Timesheets]]
+  [[https://telefunk.telespazio-vega.de/supportservices/timerecording/Pages/Home.aspx][Timesheets]]
+  [[https://telefunk.telespazio-vega.de/supportservices/humanResources/legalaspects/Pages/Home.aspx#part-time][Part-Time (General)]]
+  [[https://telefunk.telespazio-vega.de/supportservices/humanResources/legalaspects/Documents/Teilzeit-Info%2520Telefunk_Okt%25202015.pdf][Part-Time (PDF)]]
+  [[http://www.gesetze-im-internet.de/tzbfg/__8.html][Part-Time (Law)]]
 *** Replicon 
 https://na1.replicon.com/TelespazioVega/main.aspx
 *** Forms
