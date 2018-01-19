@@ -33,7 +33,7 @@ Top Right - Title, press small button containing 3 small dots
       [[G:\PMO\04 QA\AUDITING\Internal Audits]] 
 Enter Scheduled Start and end times (also Actual Times)
 Enter Auditor and Auditee
-Scope should be set automatically
+Scope should be set automatically, but note to select ISO9001:2015 in the “Area of Standard” Managed List. 
 
 **** Create Checklist (questions to be asked)
 On Checklists form, select Add "Checklist"
@@ -78,6 +78,8 @@ https://na1.replicon.com/TelespazioVega/main.aspx
 **** 2018 
 ***** Company Holidays 
 [[https://telefunk.telespazio-vega.de/supportservices/humanResources/benefits/Pages/Office-staff-company-days-2018.aspx][Company Holidays]]
+*** vSphere Client (now Web Interface) 
+https://gedavc01/ui
 * Gaia 
 ** Documentation 
 *** Super OOL
@@ -107,7 +109,248 @@ This procedure provides the required steps to replay TM from one data stream on 
 Replayer functionality of TM Spacon. An example use case is replaying 2002 data on data stream 1002 in case of
 an incomplete ONLC VC2 archive. Since the verifier does not consider S1 packets being received on the offline
 stream, this functionality enables the user to consolidate TC verification states.
+** CFIs
+*Important !* See individual LOGBOOK for update details
 
+*** MCS D3.6.5 based on S2K 5.4.15 (plus EFRs)
+*** FARC 2.1.7 (plus EFRs)
+*** SMF 2.4.0      (plus EFRs: smf#624, matis25#21, smf#639, smf#640, smf#641, smf#637, smf#642)
+*** SMF S2K 5.4.21 (plus automati#107, automati#114 + Gaia extensions for access to new Gaia functionality in TM Spacon, FTM etc.)
+:LOGBOOK:
+- Note taken on [2018-01-12 Fr 12:02] \\
+  Hi Norbert,
+  
+  I have had a quick look through the docs (thanks) but my main concern/question is about the versions of SMF and SMF_S2K which, by my understanding need to be exactly compatible. Neither myself nor Pete could remember if anyone was looking specifically at checking this, hence my email.
+  
+  Gaia is currently based on:
+  - (S2K 5.4.21 + patches)
+  - SMF 2.4.0 + smf#624, matis25#21, smf#639, smf#640, smf#641, smf#637, smf#642
+  - SMF_S2K 5.4.21 + automati#107, automati#114 +Gaia extensions (for access to new Gaia functionality in TM Spacon, FTM etc.)
+  
+  When it is available (hopefully soon) we will migrate to:
+  - SMF 2.4.1i3
+  - SMF_S2K 5.4.23 (to which we will migrate the Gaia extensions
+  
+  I am not sure whether you can answer this question directly, but maybe you can pass the email to someone who can !
+  
+  Regards, Simon
+:END:
+*** ECS/LMS 1.0.8 
+**** Restart of stop working
+[2018-01-12 Fr] Dear all,
+
+It could be that the LMS TM stopped being archived at 01:59 on 10th ?
+If so then I think Ran usually just restarts LMS/SMF?
+
+Regards, Simon
+**** ECSB
+My understanding is that ECSB is the Halley machine (confusing for us on Gaia where usually 'a'=Halley and 'b'=Deneb !),
+and is the Prime LMS Server for Gaia. Gaia LMS reports ECSB errors because that is what it is configured for
+
+As mentioned by Simon, Gaia connects to ecsb (on Halley) as our prime LMS server. I assume this means we use LMS-B, i.e.
+ecsa runs LMS-A, ecsb runs LMS-B. Therefore if LMS-B is the operational one then it should be fine.
+
+*** MATIS 2.5.11
+[[file+sys:P:\GAIAMDS\Documentation\SWS\Spacon MCS Procedures\D01 - GAIA-ESC-TN-0097 (Gaia MATIS Operational Concept i1r0draft).docx]]
+**** Restart if problem
+[2018-01-12 Fr] Hi Simon, 
+exactly on that day at that time we had a possible SMF issue (also MATIS malfunctioned) which we' re analysing with
+Lukasz. After this problem, later in the morning, I restarted the whole Automation chain including SMF and LMS server.
+Is the LMS data archiving working again?
+
+Cheers 
+Marco Zambianchi
+
+*** SLE API 3.4.0 
+*** DARC 2.5.0p2
+:LOGBOOK:
+- Note taken on [2017-12-19 Di 14:57] \\
+  Hi GAIA SwS, 
+  
+  With DARC-614 we are aiming at further optimising the DARC delete operations. The optimisation as defined in the investigation, will be valid only for scheduled delete jobs for all parameters (manual delete jobs will remain as they are now). I know that in GAIA you are not using the schedule delete features but triggering the delete via Darc vader. For that reason, could you please confirm that the delete jobs would be identified by the system as scheduled delete jobs and therefore be able to benefit from the optimisation to be provided by this SCR? 
+  
+  Thanks for the clarification. 
+  
+  Cheers, 
+  Rui
+- Note taken on [2017-12-19 Di 14:49] \\
+  Gaia LTA now running latest DARC-660 patch:
+  SK 19/12/17: BTW I called this version 2.5.0p2 (the previous version allowing fast data deletion was called 2.5.0p1, tracked by CR-373).
+- Note taken on [2017-12-19 Di 11:27] \\
+  Dear all,
+  
+  I have patched gaialta with the same patch as has been tested on gaialtb over the last few weeks.
+  
+  (For those not in the Gaia Weekly FCT Meeting today my crontab killing of the PDGs (restarted by DARC Vader) has created
+  several hits of an Ongoing Consolidation and Live TM at the same time, and the DARC has logged them and recovered
+  correctly).
+  
+  I also followed the relevant sections of GND-GO-0010 and restarted the EDDS Servers, ARES and WebMUST.
+  
+  We will see how tonight's Consolidation goes !
+  
+  (@Pete: I suggest we leave the SPACONs doing the Dump Acks on *both* LTA machines, at least till the end of the week,
+  just to provide a reference in case we see any Consolidation anomaly on gaialta.)
+  
+  Regards, Simon
+- Note taken on [2017-12-11 Mo 11:04] \\
+  Checked with Simon
+:END:
+**** Explanation of DUDs (marked yellow in DashBoard) + Dashboard Jobs Display
+
+Yellow is 'nominal'. 3 3ypes:
+
+1) 'dud' - I think this is where CPD returns 0 data, even though there is data there. Normally this stops the Cons, but
+   with DARC Vader this is seen, and the Cons re-submitted, So above each 'dud' row you should see an identical Window
+   Start/End range that works.
+
+2) in 2 cases the 'pace' is above the nominal range (pace is how much faster than realtime the Cons TM is processed).
+   These 2 could be false positives where the is a lot less data to process than usual, so the Cons. finishes faster !!
+   The expected range was set based on experience: if what we see 4.25 and 4.83 are really OK, then we could raise the
+   expected fastest speed to Yellow=5.0)
+
+3) PC: third case and these faster jobs may be a result of that. The job seems to partially finish before re-submitted
+   by DARC Vader (I assume) only from the point it failed at. So not really a dud, but a "partial job" where the end
+   time is the same but the start time later. See the examples below.
+
+#+DOWNLOADED: file:C%3A/Users/mclements/Documents/Emacs/GTD/Images/DARC_Dud_Jobs.png @ 2017-12-07 15:28:50
+[[file:Gaia/DARC_Dud_Jobs_2017-12-07_15-28-50.png]]
+
+NOTE !!
+
+4/1/18: The Dashboard is currently configured to show *all* jobs for the last 3
+days, but for days 4-10 it only shows the *Yellow/Red* entries, not the OK ones
+! (If you want to check the older OK ones, you scroll back to an older Dashboard
+page.)
+
+**** In case the DARC PDG Gen (i.e. the process that consolidates VC2) get stuck - i.e. the LCT does not move
+
+forward then do the following:
+- try restarting the PDG processes and DARC (note DARC Vader will start PDGs automatically if PDGs are down)
+If this does not help, then try to clear the DARC queue with:
+- Stop DARC Vader
+- Stop DARC MMI.
+- Stop DARC and the three PDG processes.
+- Clear consolidation queue - log in to mysql as user admin and password  (in gaiaops account on gaialta):
+  mysql –u admin –verbose –p<various> –P 3308 –h 127.0.0.1  (note no gap between -p and various!, in the 'Various'(!) file search for admin and 3308)
+- Then in mysql prompt:
+  use DARC_DB;
+  select * from QUEUE_FILL_PARAMETER_TBL;
+  delete  from QUEUE_FILL_PARAMETER_TBL;
+- Restart eveything
+
+In the PDG Gen log we should see packets being extracted with increasing times, also the LCT should be
+moving forward.
+
+Note if we need to rewind the LCT then:
+- Stop DARC Vader
+- Start DARC MMI
+- On left select DataArchive_SCOS/Data spaces/<active DB> - right click
+- Change Start Time (or End Time?) and presss LCT button
+- Start DARC Vader
+
+**** Explanation of DARC/PDG Patch to prevent Unintentional Jump Forward 
+Note: patch installed first on gaialtb, then on gaialta (19/12/17)
+
+Hi Simon, 
+
+Just to clarify on the observation reported in this email. Even after the patch,
+the consolidation can prematurely stop if the retrieval from S2K provides a
+packet outside the consolidation time range (even if there is a jump larger than
+the max allowed by configuration) since the main objective of the patch was to
+prevent updates to the LCT that would cause gaps in the data. If the
+consolidation stops prematurely without updating the LCT, this should not cause
+a gap and the interval (in case there was really missing data) would be
+populated with the next consolidation. We could introduce a similar approach for
+the package data received from S2K (based on the package time) however this
+would introduce yet another level of complexity with limited benefits (from the
+tests this scenario didn't seem to happen very often and would not cause a data
+gap).
+
+@Nick: feel free to correct me in case my knowledge of the final version of the
+patch is incorrect.
+
+Cheers, 
+Rui 
+
+**** DARC Delete Jobs 
+Perfect. This would mean GAIA could benefit from this SCR immediate without any further update to Darc vader. 
+
+Cheers, 
+Rui 
+
+----
+
+Hi Rui,
+
+I can confirm that the Delete jobs are logged as "TYPE: SCHEDULED_DELETE_DYNAMIC_DATA".
+
+Regards, Simon
+
+----
+
+Hi GAIA SwS, 
+
+With DARC-614 we are aiming at further optimising the DARC delete operations.
+The optimisation as defined in the investigation, will be valid only for
+scheduled delete jobs for all parameters (manual delete jobs will remain as they
+are now). I know that in GAIA you are not using the schedule delete features but
+triggering the delete via Darc vader. For that reason, could you please confirm
+that the delete jobs would be identified by the system as scheduled delete jobs
+and therefore be able to benefit from the optimisation to be provided by this
+SCR?
+
+Thanks for the clarification. 
+**** DARC Delete Jobs - Manual Deletion 
+If the DARC DB (e.g. on LTB) fills up, then can manually delete data by selecting archive (on left) and then select time range to delete.
+Note normally LTB DARC is not running (nor DARC Vader), so live data is not processed and hence the DARC DB does not
+fill up (assuming consolidation by Spacon is also not done).
+*** DABYS FW 1.5/S2K-DM 1.4
+*** EDDS 1.5.0 
+*** ARES 1.3.0 
+**** ARES Failed Parameter Import
+Example with failed import of parameter in temporary 'ID' folder 637867 (as shown in Dashboard failed ARES import section): 
+
+login to PES (gaiadds)
+cd ARES_import  (ARES_import is a softlink to -> /mysqldb/others/ARES_HADOOP_IMPORT/import)
+cd parameter
+
+mv failed/637867/BatchRequest.Param.GAIA_HK.0.2017.359.18.05.28.970@2017.359.18.05.29.745.1.dat .
+rm -rf failed/637867
+
+This will create a temporary 'camel lock' file in the folder - ARES will reimport the parameter after couple of minutes,
+Failed folder should remain empty after the new import,
+
+*** EUD 2.4 (used by the PUS displays) 
+*** EUD TM Desktop (controlled by FCT)
+*** MCCM 4.0.1 
+*** MPS D2.0.0 
+The MPS release D3.0.0 is currently under finalisation for delivery.
+*** Gaia Supper OOL Implementation 
+I understand that "CSAM Gateway" is provided as a single Jar file which we need to run on our S2K MCS machine and that
+it connects to SMF and then provides a port that the DataMiner connects to:
+
+S2K <-> SMF Server (SDS+SRH+SM) <-> CSAM Gateway (i.e. this is a SMF Client) <-> CSAM Driver ("embedded in DataMiner")
+
+** Gaia Main Dates/Timeline 
+*** Mission Lifetime (SPC Meeting)
+During its meeting at ESA Headquarters in Paris, on 21-22 November, the SPC approved indicative extensions for the
+continued operation of five ESA-led missions: Gaia, INTEGRAL, Mars Express, SOHO, and XMM-Newton. This followed a
+comprehensive review of the current operational status and outlook of the missions and their expected scientific returns
+during the extension period. The decision will be subject to confirmation towards the end of 2018.
+
+The lifetime of Gaia, ESA's billion star surveyor, was extended by eighteen months, from 25 July 2019 to 31
+December 2020. This is the first time that Gaia, which was launched in 2013 and originally funded for a five-year
+mission, has been subject to the extension process.
+** ESOC Badges 
+Badge Types
+(JB request [2018-01-17 Mi]) I'm afraid that there is no justification for the business partner badge - in fact since a
+few years now, those are only meant to be issued to CEOs of contracting companies. Either you need regular access (e.g.
+for SWS purposes) in which case you qualify for an interim badge, or you only need occasional access, for which a
+visitor badge (and unfortunately its corresponding annoyances) is sufficient.
+** S2K Various Aspects 
+*** Time Correlation
+TN: [[P:\GAIAMDS\Documentation\INC\Gaia ESOC documentation\GAIA-ESC-TN-0108 v1.0 (Relativistically corrected time correlation - Operational status).pdf][Relativistically corrected time correlation]]
 * QA
 ** Documentation
 *** Q-Pulse 
@@ -121,24 +364,18 @@ See [[Q-Pulse]]
 [[https://ims.telespazio-vega.de/Lists/Company%20Processes/DispForm.aspx?ID=36&RootFolder=%2A][Control Of Nonconforming Product]]
 [[https://ims.telespazio-vega.de/Lists/Company%20Processes/DispForm.aspx?ID=80][Corrective Actions / Preventive Actions]] (also includes links at bottom to Create, Process and Approve/Close CA/PA Record)
 [[https://ims.telespazio-vega.de/Lists/Company%20Processes/Legacy%20Mapping.aspx][Legacy Mapping]] 
+*** Quality Assurance (SharePoint)
+https://projects.telespazio-vega.de/quality-assurance/_layouts/15/start.aspx#/
+**** ISO 9001 PA5 + RA6 + Transition to 2015
+[[https://projects.telespazio-vega.de/quality-assurance/Shared%20Documents/ISO%209001%20PA5%20%2B%20RA6%20%2B%20Transition%20to%202015][ISO 9001 PA5 + RA6 + Transition to 2015]]
 
+Current 2018 Audit Plan (Excel) ([2018-01-15 Mo] CM: this will be moved up one level to the main Sharepoint area after Transition Audit)
+https://projects.telespazio-vega.de/quality-assurance/Shared%20Documents/ISO%209001%20PA5%20+%20RA6%20+%20Transition%20to%202015/Audit%20programme%202018.xlsx 
+
+Word document (for External Auditor starting 16/01/18): [[https://projects.telespazio-vega.de/quality-assurance/Shared Documents/ISO 9001 PA5 + RA6 + Transition to 2015/PRJC-406055-Telespazio_VEGA-TA_RC-PRG-ISO9001-0118_TH.docx][Transition to 2015 Plan]]
 *** Auditing Folder (G Drive) 
 [[G:\PMO\04 QA\AUDITING\Internal Audits]]
 [[file+emacs:G:\PMO\04 QA\AUDITING\Internal Audits]]
-
-*** Quality Assurance (SharePoint)
-https://projects.telespazio-vega.de/quality-assurance/_layouts/15/start.aspx#/
-
-*** Audit Planning – Functions and Projects
-https://projects.telespazio-vega.de/quality-assurance/Shared%20Documents/Audit%20programme%202017.xlsx 
-
-List of document and processes to be reviewed
-Please add anything that crops up that you think could do with a closer look.
-https://projects.telespazio-vega.de/quality-assurance/Shared%20Documents/Documents%20and%20Processes%20to%20be%20reviewed.xlsx 
-
-Other tasks are added to the SP tasks, CD likes to have all the important QA relevant meetings in the calendar. 
-If you want a hand with Q-Pulse, let me know. 
-
 *** ISO 9001 Document
 [[file:V:\Standards\ISO\ISO 9001\ISO_9001_2015_Quality management systems - requirements.PDF][ISO_9001_2015_Quality]]
 *** Projects
@@ -531,8 +768,28 @@ git checkout ir3_branch
 *** gedappl10
 mark, sde_user
 plink mark@gedappl10 -pw sde_user
+
+*Service                    Username, Default Password*
+Nexus                    :  admin, admin (= $nexus_admin_password)
+Sonar Qube               :  admin, admin (= $sonar_admin_password)
+Nexus, Sonarqube, Jenkins:  ci, admin    (= $ci_name, $ci_password)
+
 ** Booking Codes 
 VV TEX Valdiation Test Execution and Evaluation - KPJ77966.IVT
 - test installation of SDE environment on [[gedappl10]]
 
 [[https://projects.telespazio-vega.de/egs-cc/Released%20Documents/2017-08-23%20Integration%20Release%202%20Delta%202%20Hotfix%201/egscc-sde/doc/ddf/EGSCC-SDE-SUM-1001-SDEUserManualVol1ContinuousIntegrationandDeveloperEnvironments-I1R5.pdf][SDE User Manual, Vol. 1: Continuous Integration and Developer Environments]]
+** Linux: Various 
+List installed packages: zypper packages --installed-only
+** Start VNC (gedappl10) 
+Everything should be setup in mark@gedappl10:~.vnc 
+*** Start VNC Server (if not already running):
+   Login to gedappl10 as mark
+   vncserver -geometry "1920x1080" -depth 24 :1
+   
+   Note, first time after starting VNC Server, we need to start Window manager when using VNC Client. Type in root
+   password for this
+*** Connect using VNC Client from PC.: 
+   gedappl10:1, password: sde-user
+
+   We can adjust connection, etc using 'Windows key' F8
