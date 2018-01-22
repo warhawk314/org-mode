@@ -199,6 +199,8 @@ uno\ due\ tre - search for the string "uno duo tre"
 
 (?:^|[^\w-])time(?:[^\w-]|$) - search for lisp-word "time", i.e. search for the full word "time" while considering "-" to be a word characer=
 
+** Load Path (Spacemacs)
+https://gist.github.com/TheBB/367096660b203952c162
 * Major Modes
 ** Projectile
 *** Setup
