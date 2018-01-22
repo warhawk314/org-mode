@@ -568,6 +568,11 @@ M-x term gives you a complete terminal emulator running your default shell.
 You'll want this for interactive programs which use the features of a terminal
 emulator. Learn the keybindings to switch between term-line-mode and
 term-char-mode; you'll need them.
+** TRAMP 
+*** Good resources:
+[[https://writequit.org/denver-emacs/presentations/2017-06-20-tramp.html][Emacs TRAMP]]
+[[http://www.howardism.org/Technical/Emacs/literate-devops.html][Org-Mode and TRAMP]]
+
 * General Commands
 ** General
   meta-q (i.e. alt-q)

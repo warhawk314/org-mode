@@ -72,6 +72,7 @@ After Invite has been sent, can verify people have accepted invite:
   [[https://telefunk.telespazio-vega.de/supportservices/humanResources/legalaspects/Pages/Home.aspx#part-time][Part-Time (General)]]
   [[https://telefunk.telespazio-vega.de/supportservices/humanResources/legalaspects/Documents/Teilzeit-Info%2520Telefunk_Okt%25202015.pdf][Part-Time (PDF)]]
   [[http://www.gesetze-im-internet.de/tzbfg/__8.html][Part-Time (Law)]]
+  [[https://telefunk.telespazio-vega.de/supportservices/humanResources/benefits/Pages/Payroll-News-2018.aspx][Payroll/Tax info 2018]]
 *** Replicon 
 https://na1.replicon.com/TelespazioVega/main.aspx
 *** Forms
@@ -83,6 +84,8 @@ https://na1.replicon.com/TelespazioVega/main.aspx
 [[https://telefunk.telespazio-vega.de/supportservices/humanResources/benefits/Pages/Office-staff-company-days-2018.aspx][Company Holidays]]
 *** vSphere Client (now Web Interface) 
 https://gedavc01/ui
+*** Tax/Payroll News 2018 Info 
+https://telefunk.telespazio-vega.de/supportservices/humanResources/benefits/Pages/Payroll-News-2018.aspx
 * Gaia 
 ** Documentation 
 *** Super OOL
@@ -334,6 +337,20 @@ I understand that "CSAM Gateway" is provided as a single Jar file which we need 
 it connects to SMF and then provides a port that the DataMiner connects to:
 
 S2K <-> SMF Server (SDS+SRH+SM) <-> CSAM Gateway (i.e. this is a SMF Client) <-> CSAM Driver ("embedded in DataMiner")
+** Dashboard 
+*** Cannot access Dashboard on gaiamca/gaiamcb
+This (and other symptoms) suggests a glitch between the Ops and Dev LANs since last Friday.
+I have restarted the tunnels (see - Tunnel below) on gaiamca and gaimcb and the Dashboard is accessible again.
+
+- Nominally the WS Dashboard connects to gaiamcb:8080. But if the fails the first to try is gaiamca:8080 (just edit the address in the URL bar).
+- Failing that you can try directly from you laptop to go the Dashboard at http://gaialtd:8080/ (DevLAN)
+
+On servers gaiamca and gaiamcb there are ssh tunnels in place from inside OPSLAN to DEVLAN so the dashboard can be seen on OPSLAN too.
+The tunnel may need to be (re)started on gaiamca or gaiamcb if 'glitch' between DEV and OPS LAN. See Maintenance Procedures section 3.1.:
+
+    ssh -g -N -L 8080:gaialtd.dev.esoc.esa.int:8080 gaialib@gaialtd.dev.esoc.esa.int 
+
+[[https://blog.trackets.com/2014/05/17/ssh-tunnel-local-and-remote-port-forwarding-explained-with-examples.html][Explanation of Port Forwarding]]
 
 ** Gaia Main Dates/Timeline 
 *** Mission Lifetime (SPC Meeting)
@@ -753,6 +770,17 @@ systems engineer, an engineer in another discipline who needs to perform
 systems engineering (SE), or an experienced systems engineer who needs a
 convenient reference.
 * EGS-CC 
+** Accounts 
+*** gedappl10
+mark, sde_user
+plink mark@gedappl10 -pw sde_user
+
+*Service                    Username, Default Password*
+Nexus                    :  admin, admin (= $nexus_admin_password)
+Sonar Qube               :  admin, admin (= $sonar_admin_password)
+Nexus, Sonarqube, Jenkins:  ci, admin    (= $ci_name, $ci_password)
+
+vncs : sde_user
 ** Documentation 
 [[https://projects.telespazio-vega.de/egs-cc][egs-cc]] 
 [[https://projects.telespazio-vega.de/egs-cc/Deliverable%20Documents1/a-egscc-releases/doc/EGSCC-SYS-SRelD-1014-SoftwareReleaseDocul. 1: Continuous Integration and Developer Environments]] 
@@ -767,16 +795,6 @@ Note: Git URL (see Annex A, page 126, SDE SUM): egscc.telespazio-vega.de/git/r/e
 git clone https://mclements@egscc.telespazio-vega.de/git/r/egscc/a-egscc-releases.git
 cd a-egscc-releases
 git checkout ir3_branch
-** Accounts 
-*** gedappl10
-mark, sde_user
-plink mark@gedappl10 -pw sde_user
-
-*Service                    Username, Default Password*
-Nexus                    :  admin, admin (= $nexus_admin_password)
-Sonar Qube               :  admin, admin (= $sonar_admin_password)
-Nexus, Sonarqube, Jenkins:  ci, admin    (= $ci_name, $ci_password)
-
 ** Booking Codes 
 VV TEX Valdiation Test Execution and Evaluation - KPJ77966.IVT
 - test installation of SDE environment on [[gedappl10]]
@@ -788,7 +806,7 @@ List installed packages: zypper packages --installed-only
 Everything should be setup in mark@gedappl10:~.vnc 
 *** Start VNC Server (if not already running):
    Login to gedappl10 as mark
-   vncserver -geometry "1920x1080" -depth 24 :1
+   vncserver -geometry "1920x1080" -depth 24 :1    (1920*1080 seems to work fine for my current pc screens)
    
    Note, first time after starting VNC Server, we need to start Window manager when using VNC Client. Type in root
    password for this
