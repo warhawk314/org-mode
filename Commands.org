@@ -43,12 +43,75 @@ use C-g to cancel it.
 C-c C-f Follow Mode when using Helm
 
 * Setup
-** Optimised Emacs Binaries for Windows 10
-http://emacsbinw64.sourceforge.net
-E.g. “w64 25.2 O2 with Modules”
+** Cygwin
+Downloaded cygwin 64 bit
+Run install without admin priv (start cmd.exe, invoke: setup-x86_64.exe -no-admin)
+installed base packages
+Note only the *base* Category is installed first (then installed some additional packages e.g. open-ssh and emacs-w32)
+
+Cygwin environment may be started by running Cygwin64 Terminal
+
+Cygwin is installed in C:\cygwin (~400 MB)
+- binaries are kept in C:\cygwin\bin
+- user home is C:\cygwin\home
+- Emacs version is Cygwin emacs-w32 (r25.3-1) (built with win32 native Gui, and using cygwin POSIX system)
+  Note currently emacs only starts correctly (probably path setting) when invoked in cygwin terminal
+
+*** Update and Management of Cygwin Packages
+Open Windows CMD.exe
+cd C:\Users\mclements\Documents\Tools\cygwin
+run: setup-x86_64.exe --no-admin
+
+*** Older Notes (for Windows Emacs build version Interfacing to Cygwin)
+git clone https://github.com/d5884/fakecygpty.git (do in cygwin environment
+ or copy files to a folder in cygwin env)
+
+Build according to instructions in: https://github.com/d5884/fakecygpty  :
+
+	gcc -D_GNU_SOURCE -o fakecygpty fakecygpty.c
+	gcc -o qkill qkill.c
+
+copy *.exe into somewhere on you $PATH.
+
+This should create two exes: qkill.exe and fakecygpty.exe
+
+Next: find out how to use in Emacs. Read header of fakecygpty.el).
+See also: https://www.emacswiki.org/emacs/SshWithNTEmacs
+Load Path (Spacemacs): https://gist.github.com/TheBB/367096660b203952c162
+Seems that we only need to push to load_path, i.e: (push "/some/path/" load-path) (see previous link)
+Probably need to use: (require 'my-feature) at some point to load required el file.
+
+Sets your shell to use cygwin's bash
+https://www.emacswiki.org/emacs/NTEmacsWithCygwin
+
+https://github.com/ieure/ssh-el
+https://www.emacswiki.org/emacs/SshWithEmacs
+https://www.emacswiki.org/emacs/AnsiTermHints
+
+https://stackoverflow.com/questions/9670209/cygwin-bash-does-not-display-correctly-in-emacs-shell
+
+
+Status:
+Some progress. Used "fakecygpty ssh mark@.."
+This seemed to work. History works.
+Completion seems to with (WIndows) ALT /   (keyboard at home: ALT Shift 7). This uses Hippie Expand.
+
+Cygwin: installed w32EMacs (emacs version built for Windows)
+Installed Spacemacs in Cygwin (i.e. replaced .emacs.d)
+
+Enable OS to open file in Dired
+"	created marks.el in home account within Cygwin /home/Mark
+"	Updated .spacemacs /user-config() to (load <marks.el>)
+"	This contains redefinition of spacemacs/open-in-external-app (overrides .emacs.d/layers/+distributions/spacemacs-base/funcs.el)
+
+Note that M-X : enables one to run a none-interactive lisp function
 
 ** Location of .emacs.d (home PC) 
-C:\Users\Mark\AppData\Roaming\.emacs.d
+C:\cygwin\home\mclements\.emacs.d (same as /home/mclements/.emacs.d in cygwin environment)
+Previous (Windows build of Emacs): C:\Users\Mark\AppData\Roaming\.emacs.d
+** Optimised Emacs Binaries for Windows 10 (29/1/18 Note: now using Cygwin emacs-w32, see Cygwin)
+http://emacsbinw64.sourceforge.net
+E.g. “w64 25.2 O2 with Modules”
 
 ** Download Adobe Source Code Pro Fonts and Install (Windows 10) 
 Open the fonts directory with Win-r , shell:fonts
@@ -64,9 +127,12 @@ Copy all font files to the fonts folder (see above, requires Admin) privilege.
 	OTF: OpenType fonts (slightly more advanced)
 
 ** Install Spacemacs 
-Follow instructions, but is simply removing (or make backup) of .emacs.d (see above) then git clone of spacemacs to .emacs.d
+Very simple - simply swapout emacs user .emacs.d folder with Spacemacs .emacs.d folder.
+Simply checkout (make backup of previous .emacs.d):
+      git clone https://github.com/syl20bnr/spacemacs .emacs.d
 Then start emacs as normal.
-Install the normal Spacemacs (note the base version, not sripped down version).
+
+Further instructions if needed:
 https://simpletutorials.com/c/2758/How+to+Install+Spacemacs+on+Windows
 
 ** EMACS Server Setup on Windows 10 

@@ -47,6 +47,8 @@ View images/attachment : Actions / Edit Properties / Attachments
 
 Alternatively, use the Properties frame at bottom for adding/viewing.
 
+*** PC Display Resolution 
+1920 * 1080 (Windows, Advanced Display Settings)
 ** TPZ 
 *** How to Book Meeting Room
 Outlook Calendar, check which meetings rooms are free
@@ -116,7 +118,7 @@ Replayer functionality of TM Spacon. An example use case is replaying 2002 data 
 an incomplete ONLC VC2 archive. Since the verifier does not consider S1 packets being received on the offline
 stream, this functionality enables the user to consolidate TC verification states.
 ** CFIs
-*Important !* See individual LOGBOOK for update details
+*Important !* See individual LOGBOOK for update / patch details
 
 *** MCS D3.6.5 based on S2K 5.4.15 (plus EFRs)
 *** FARC 2.1.7 (plus EFRs)
@@ -308,9 +310,15 @@ SCR?
 
 Thanks for the clarification. 
 **** DARC Delete Jobs - Manual Deletion 
-If the DARC DB (e.g. on LTB) fills up, then can manually delete data by selecting archive (on left) and then select time range to delete.
-Note normally LTB DARC is not running (nor DARC Vader), so live data is not processed and hence the DARC DB does not
-fill up (assuming consolidation by Spacon is also not done).
+If the DARC DB (e.g. on LTB) fills up, then can manually delete data by selecting archive (on left) and then select time
+range to delete. Note normally LTB DARC is not running (nor DARC Vader), so live data is not processed and hence the
+DARC DB does not fill up (assuming consolidation by Spacon is also not done).
+**** Restart of DARC (and due to DUDs) 
+PC: 31/1/18: The DARC seems to be having some problems with the last couple of consolidations, with many duds. We just
+re-started DARC on LTA and let DARC Vader re-start everything, so hopefully it improves now. No gaps in ARES observed so
+far though. Re-starting DARC automatically after a configurable number of duds is precisely one of the improvements
+Joerg is working on, so hopefully this will be dealt with better in future.
+
 *** DABYS FW 1.5/S2K-DM 1.4
 *** EDDS 1.5.0 
 *** ARES 1.3.0 
@@ -351,9 +359,18 @@ The tunnel may need to be (re)started on gaiamca or gaiamcb if 'glitch' between 
     ssh -g -N -L 8080:gaialtd.dev.esoc.esa.int:8080 gaialib@gaialtd.dev.esoc.esa.int 
 
 [[https://blog.trackets.com/2014/05/17/ssh-tunnel-local-and-remote-port-forwarding-explained-with-examples.html][Explanation of Port Forwarding]]
+** Subversion (SVN) 
+Note use version 1.9.4 of SVN (original version 1.5.7 in /usr/bin gives : SSL negotiation failed: SSL error: unexpected message) on gedaiv106 (mcdev)
+
+/home/gmcs/tools/bin/svn ls https://svn.telespazio-vega.de/svn/gaiamcs/trunk
+
+e.g. using Subversion at mcdev@gedaiv106, use for SVN repo Windows credential login
+
+SK:[2018-01-25 Do] For the (search) record: fixed by using ~gmcs/tools/bin/svn (1.9.4) (after cert. get /usr/bin/svn seems to work OK !)
+(also available at ESOC: presume in gaialib@gaialtd)
 
 ** Gaia Main Dates/Timeline 
-*** Mission Lifetime (SPC Meeting)
+*** Mission Lifetime
 During its meeting at ESA Headquarters in Paris, on 21-22 November, the SPC approved indicative extensions for the
 continued operation of five ESA-led missions: Gaia, INTEGRAL, Mars Express, SOHO, and XMM-Newton. This followed a
 comprehensive review of the current operational status and outlook of the missions and their expected scientific returns
@@ -362,6 +379,9 @@ during the extension period. The decision will be subject to confirmation toward
 The lifetime of Gaia, ESA's billion star surveyor, was extended by eighteen months, from 25 July 2019 to 31
 December 2020. This is the first time that Gaia, which was launched in 2013 and originally funded for a five-year
 mission, has been subject to the extension process.
+--
+
+AK [2018-01-25 Do] End of the mission which is expected to be until 2024
 ** ESOC Badges 
 Badge Types
 (JB request [2018-01-17 Mi]) I'm afraid that there is no justification for the business partner badge - in fact since a
@@ -371,6 +391,11 @@ visitor badge (and unfortunately its corresponding annoyances) is sufficient.
 ** S2K Various Aspects 
 *** Time Correlation
 TN: [[P:\GAIAMDS\Documentation\INC\Gaia ESOC documentation\GAIA-ESC-TN-0108 v1.0 (Relativistically corrected time correlation - Operational status).pdf][Relativistically corrected time correlation]]
+*** Notes on MySQL / PARC DB
+The file partition that MySQL is lcoated on is always near 100% (designed this way to allow MySQL to use entire partition.
+Can create new PARC DB using PARC Tool (Create Dataspace).
+Can delete database using MySQL 'drop' command. This does not actually free up space straight away (MySQL will decide when).
+
 * QA
 ** Documentation
 *** Q-Pulse 
@@ -776,7 +801,7 @@ mark, sde_user
 plink mark@gedappl10 -pw sde_user
 
 *Service                    Username, Default Password*
-Nexus                    :  admin, admin (= $nexus_admin_password)
+Nexus                    :  admin, admin (= $nexus_admin_password); http://gedappl10:8081/nexus
 Sonar Qube               :  admin, admin (= $sonar_admin_password)
 Nexus, Sonarqube, Jenkins:  ci, admin    (= $ci_name, $ci_password)
 
