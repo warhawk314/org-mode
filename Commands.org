@@ -638,7 +638,37 @@ term-char-mode; you'll need them.
 *** Good resources:
 [[https://writequit.org/denver-emacs/presentations/2017-06-20-tramp.html][Emacs TRAMP]]
 [[http://www.howardism.org/Technical/Emacs/literate-devops.html][Org-Mode and TRAMP]]
+** Diary 
+Set appointment reminder with appt-add.
+Warning x minutes beforehand and duration of reminder is configurable.
+** Elisp and Snippets
+*** Example of using ido-completing-read to select from List
 
+(defun foo (list)
+  (interactive)
+  (let ((arg (ido-completing-read "Select from list: " list)))
+    (message (concat "plink mcdev " arg))
+    )
+  )
+
+(foo '("gedaiv106" "gedaiv126" "gedaiv127" "gedaiv128"))
+
+*** Set Spacemacs Leader Keys (reserved for User)
+
+(spacemacs/set-leader-keys "os" 'new-shell)
+
+SPC o and SPC m o are reserved for the user. Setting key bindings behind these
+is guaranteed to never conflict with Spacemacs default key bindings.
+
+Example: Put (spacemacs/set-leader-keys "oc" 'org-capture) inside
+dotspacemacs/user-config in your ~/.spacemacs file, to be able to use SPC o c to
+run org mode capture.
+
+*** Useful String Funcs, e.g. trim (Emacs 24.4)
+
+Can use split-string for trimming, e.g. (split-string "  hello       “). It also contains a trim var.
+
+See also: https://github.com/emacs-mirror/emacs/blob/master/lisp/emacs-lisp/subr-x.el
 * General Commands
 ** General
   meta-q (i.e. alt-q)
