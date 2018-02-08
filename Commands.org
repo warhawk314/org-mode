@@ -274,7 +274,31 @@ https://gist.github.com/TheBB/367096660b203952c162
     For Windows, set this in .spacemacs user-config. This should allow reliable indexing in Windows.
 
     (setq projectile-indexing-method 'native)
-  
+*** Find in context of projectile for Windows
+https://emacs.stackexchange.com/questions/29942/projectile-indexing-wont-work-on-windows
+
+A few details about find in context of projectile for Windows:
+
+On Windows, projectile defaults to setting projectile-indexing-method to native,
+which does not use external tools like find. If it is calling find then you may
+have changed the configuration to use alien indexing, which looks for external
+tools. 
+
+If you use alien indexing, projectile will first check if the project
+uses a version control tool that provides fast searching, e.g. git. Otherwise it
+will fall back to using projectile-generic-command. 
+
+The default value for projectile-generic-command is "find . -type f -print0". 
+
+Note that this is a string passed to shell-command-to-string, and so it expects
+that the shell will have find on the PATH. Changing e.g. find-program and
+exec-path are not relevant here, since those do not affect a shell process
+created by Emacs.
+
+So if projectile is failing to use the right find command, you probably want to
+make sure that your shell (as determined by shell-file-name) is running with the
+right PATH. As I noted above, you can setenv PATH within Emacs, and this will
+affect the environment of shell processes that Emacs creates.
 *** Create new Project and Enable Indexing
     See (projectile-indexing-method 'native) above.
     Create an empty .projectile file in top level folder, make sure file is saved.
