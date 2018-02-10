@@ -665,6 +665,11 @@ term-char-mode; you'll need them.
 ** Diary 
 Set appointment reminder with appt-add.
 Warning x minutes beforehand and duration of reminder is configurable.
+
+Note the related command: appt-activate
+
+Can also set display duration with:
+appt-display-duration
 ** Elisp and Snippets
 *** Example of using ido-completing-read to select from List
 
@@ -693,6 +698,31 @@ run org mode capture.
 Can use split-string for trimming, e.g. (split-string "  hello       “). It also contains a trim var.
 
 See also: https://github.com/emacs-mirror/emacs/blob/master/lisp/emacs-lisp/subr-x.el
+** Source Code Tagging (e.g. GNU Global) 
+Good overview: https://stackoverflow.com/questions/12922526/tags-for-emacs-relationship-between-etags-ebrowse-cscope-gnu-global-and-exub
+*** GNU Global
+Spacemacs Layer: https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Btags/gtags
+**** Build Global on Windows (Cygwin)
+Built as suggested by Layer doc for working with exuberant-ctags (Spacemacs Layer: https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Btags/gtags)
+
+Download into local Cygwin home account (e.g. /home/Mark) latest souce for GNU Global (I build at home latest release global-6.6.2.tar.gz)
+
+tar xvf global-6.5.3.tar.gz
+cd global-6.5.3
+./configure --with-exuberant-ctags=/usr/bin/ctags --disable-gtagscscope
+make install
+
+Run global --version  (to confirm running ok)
+
+----
+
+[2018-02-10 Sat] Current status: cygwin build worked ok for globals and gtags, installed in cygwin /usr/local/bin
+Iin the Stockfish 6 src direct (projectile project) I successfully created (once) the tags file !
+However after that time, caanot seem to recreate it. Also lookup of symbols does not work.
+Maybe only works with Windows versions for these tools (global and gtags).
+Maybe need to install ctags in cygwin ?
+Another idea - just try ctags (exuberant) by itself.
+
 * General Commands
 ** General
   meta-q (i.e. alt-q)
