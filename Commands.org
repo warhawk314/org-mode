@@ -723,6 +723,9 @@ Maybe only works with Windows versions for these tools (global and gtags).
 Maybe need to install ctags in cygwin ?
 Another idea - just try ctags (exuberant) by itself.
 
+See also 3.6.2 Preparation of https://www.gnu.org/software/global/globaldoc_toc.html#Emacs-editor
+e.g. (setq load-path (cons "/home/owner/global" load-path))
+
 * General Commands
 ** General
   meta-q (i.e. alt-q)
