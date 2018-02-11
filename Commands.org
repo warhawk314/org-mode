@@ -725,6 +725,14 @@ Another idea - just try ctags (exuberant) by itself.
 
 See also 3.6.2 Preparation of https://www.gnu.org/software/global/globaldoc_toc.html#Emacs-editor
 e.g. (setq load-path (cons "/home/owner/global" load-path))
+** MAGIT 
+When ediffing (via 'e') unstaged files, ediff presents 3 way diff.
+Can set following variable to display expected 2 way diff (for seeing diff for unstaged files):
+
+magit-ediff-dwim-show-on-hunks to t
+https://github.com/magit/magit/issues/1743
+
+Note if dont set this then have to use e.g. AC to copy from diff buffer A to buffer C
 
 * General Commands
 ** General
