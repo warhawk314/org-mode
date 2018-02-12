@@ -702,6 +702,15 @@ See also: https://github.com/emacs-mirror/emacs/blob/master/lisp/emacs-lisp/subr
 Good overview: https://stackoverflow.com/questions/12922526/tags-for-emacs-relationship-between-etags-ebrowse-cscope-gnu-global-and-exub
 *** GNU Global
 Spacemacs Layer: https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Btags/gtags
+
+**** Ctags as backend (optional)
+You use ctags backend when you need to work with languages that GNU Global does not support,
+i.e. you can use Universal Ctags as a plug-in parser too.
+
+Not sure if Need to compile global and point to the universal-ctags executable.
+Seems not according to section 4.2 "Plug-in parser" of :  https://www.gnu.org/software/global/manual/global.html
+and also the spacemacs layer doc.
+
 **** Build Global on Windows (Cygwin)
 Built as suggested by Layer doc for working with exuberant-ctags (Spacemacs Layer: https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Btags/gtags)
 
