@@ -768,18 +768,20 @@ Note if dont set this then have to use e.g. AC to copy from diff buffer A to buf
 ** Projectile Search and RIPGREP 
 See also: https://gist.github.com/pesterhazy/fabd629fbb89a6cd3d3b92246ff29779
 
-SPC / should allow you to search in the current project.
+SPC / should allow you to search in the current project (set so that SPC / uses RIPGREP).
 
-You can prefix patterns with options
+You can prefix patterns with options (RIPGREP)
 
--g*.H a.*hack    - search for the word "time" in all .cljs files (*seems to work !*)
--C5 foo          - search for "foo" but show 5 lines of context before and after the match (*seems to work !*)
+-g*.H a.*hack    - search for the Reg Exp a.*hack in all .H files, 
+                   NOTE *NO* space in '-g*.H' !! (works well !)
+-C5 foo          - search for "foo" but show 5 lines of context before and after the match, 
+                   NOTE the space in '-C5 foo' (works well !)
 
 Other forms:
--g*.cljs -w time
--tclojure time - search for "time" in all .{clj,cljs,cljc} files
-uno\ due\ tre - search for the string "uno duo tre"
-(?:^|[^\w-])time(?:[^\w-]|$) - search for lisp-word "time", i.e. search for the full word "time" while considering "-" to be a word characer
+-g*.cljs -w time 
+-tclojure time - search for 'time' in all .{clj,cljs,cljc} files
+uno\ due\ tre - search for the string 'uno duo tre'
+(?:^|[^\w-])time(?:[^\w-]|$) - search for lisp-word 'time', i.e. search for the full word 'time' while considering '-' to be a word characer
 * General Commands
 ** General
   meta-q (i.e. alt-q)
