@@ -662,14 +662,30 @@ term-char-mode; you'll need them.
 *** Good resources:
 [[https://writequit.org/denver-emacs/presentations/2017-06-20-tramp.html][Emacs TRAMP]]
 [[http://www.howardism.org/Technical/Emacs/literate-devops.html][Org-Mode and TRAMP]]
-** Diary 
-Set appointment reminder with appt-add.
+** Diary / Appt 
+We can use diary to add events (days/times) - mapped to SPC o d (can also display Calender via SPC o c then press s)
+An alarm will appear (according to below configuration) just before event time (Emacs will pop-up even if using another application).
+
+Can also add quick appointment reminders by using 'appt-add', see below.
+
+*** Set quick appointment reminder with appt-add.
 Warning x minutes beforehand and duration of reminder is configurable.
 
 Note the related command: appt-activate
 
-Can also set display duration with:
-appt-display-duration
+*** General Important Documentation for Configuration of Reminders:
+Once an appointment becomes due, Emacs displays reminders every *appt-display-interval* minutes (currently 3 minutes,
+interval in minutes at which to display reminders). You probably want to make *appt-message-warning-time* (currently 12
+minutes, minutes before warning that warning begins) be a multiple of this, so that you get a final message displayed
+precisely when the appointment is due.
+
+Note that this variable controls the interval at which *appt-display-message* is called. The mode line display (if
+active) always updates every *minute*.
+
+See also *appt-display-duration* (Its value is 300, Original value was 10)
+The number of seconds an appointment message is displayed.
+Only relevant if reminders are to be displayed in their own window.
+
 ** Elisp and Snippets
 *** Example of using ido-completing-read to select from List
 
