@@ -685,35 +685,14 @@ active) always updates every *minute*.
 See also *appt-display-duration* (Its value is 300, Original value was 10)
 The number of seconds an appointment message is displayed.
 Only relevant if reminders are to be displayed in their own window.
+** MAGIT 
+When ediffing (via 'e') unstaged files, ediff presents 3 way diff.
+Can set following variable to display expected 2 way diff (for seeing diff for unstaged files):
 
-** Elisp and Snippets
-*** Example of using ido-completing-read to select from List
+magit-ediff-dwim-show-on-hunks to t
+https://github.com/magit/magit/issues/1743
 
-(defun foo (list)
-  (interactive)
-  (let ((arg (ido-completing-read "Select from list: " list)))
-    (message (concat "plink mcdev " arg))
-    )
-  )
-
-(foo '("gedaiv106" "gedaiv126" "gedaiv127" "gedaiv128"))
-
-*** Set Spacemacs Leader Keys (reserved for User)
-
-(spacemacs/set-leader-keys "os" 'new-shell)
-
-SPC o and SPC m o are reserved for the user. Setting key bindings behind these
-is guaranteed to never conflict with Spacemacs default key bindings.
-
-Example: Put (spacemacs/set-leader-keys "oc" 'org-capture) inside
-dotspacemacs/user-config in your ~/.spacemacs file, to be able to use SPC o c to
-run org mode capture.
-
-*** Useful String Funcs, e.g. trim (Emacs 24.4)
-
-Can use split-string for trimming, e.g. (split-string "  hello       “). It also contains a trim var.
-
-See also: https://github.com/emacs-mirror/emacs/blob/master/lisp/emacs-lisp/subr-x.el
+Note if dont set this then have to use e.g. AC to copy from diff buffer A to buffer C
 ** Source Code Tagging (e.g. GNU Global) 
 Good overview: https://stackoverflow.com/questions/12922526/tags-for-emacs-relationship-between-etags-ebrowse-cscope-gnu-global-and-exub
 *** GNU Global
@@ -774,23 +753,20 @@ Simple test at work seems to work ok:
   Invoke ctags: ctags -e -R .   (create TAGS file in project root, in emacs format)
   Usage: In projectile goto any C++ file, and invoke C-] to find definition of symbol.
 
+  Define variable *projectile-tags-command* in DOT spacemacs, e.g.: 
+  (setq projectile-tags-command "c:\\ctags\\ctags.exe -R -e")
+
+  See https://simpletutorials.com/c/2826/How+to+setup+etags+for+fuzzy+symbol+searching+in+Spacemacs+on+Windows
+
   Script to use for TAGS file generation with ctags
   https://simpletutorials.com/c/2970/Python%20script%20for%20searching%20directories%20and%20outputting%20file%20paths
-
-** MAGIT 
-When ediffing (via 'e') unstaged files, ediff presents 3 way diff.
-Can set following variable to display expected 2 way diff (for seeing diff for unstaged files):
-
-magit-ediff-dwim-show-on-hunks to t
-https://github.com/magit/magit/issues/1743
-
-Note if dont set this then have to use e.g. AC to copy from diff buffer A to buffer C
 ** Projectile Search and RIPGREP 
 See also: https://gist.github.com/pesterhazy/fabd629fbb89a6cd3d3b92246ff29779
 
 SPC / should allow you to search in the current project (set so that SPC / uses RIPGREP).
 
-You can prefix patterns with options (RIPGREP)
+You can prefix patterns with options (RIPGREP).
+Useful ones:
 
 -g*.H a.*hack        - search for the Reg Exp a.*hack in all .H files, 
                        NOTE *NO* space in '-g*.H' !! (works well !)
@@ -803,6 +779,35 @@ Other forms:
 -tclojure time - search for 'time' in all .{clj,cljs,cljc} files
 uno\ due\ tre - search for the string 'uno duo tre'
 (?:^|[^\w-])time(?:[^\w-]|$) - search for lisp-word 'time', i.e. search for the full word 'time' while considering '-' to be a word characer
+
+** Elisp and Snippets
+*** Example of using ido-completing-read to select from List
+
+(defun foo (list)
+  (interactive)
+  (let ((arg (ido-completing-read "Select from list: " list)))
+    (message (concat "plink mcdev " arg))
+    )
+  )
+
+(foo '("gedaiv106" "gedaiv126" "gedaiv127" "gedaiv128"))
+
+*** Set Spacemacs Leader Keys (reserved for User)
+
+(spacemacs/set-leader-keys "os" 'new-shell)
+
+SPC o and SPC m o are reserved for the user. Setting key bindings behind these
+is guaranteed to never conflict with Spacemacs default key bindings.
+
+Example: Put (spacemacs/set-leader-keys "oc" 'org-capture) inside
+dotspacemacs/user-config in your ~/.spacemacs file, to be able to use SPC o c to
+run org mode capture.
+
+*** Useful String Funcs, e.g. trim (Emacs 24.4)
+
+Can use split-string for trimming, e.g. (split-string "  hello       “). It also contains a trim var.
+
+See also: https://github.com/emacs-mirror/emacs/blob/master/lisp/emacs-lisp/subr-x.el
 * General Commands
 ** General
   meta-q (i.e. alt-q)
@@ -966,7 +971,7 @@ URL Types (http://orgmode.org/manual/External-links.html):
   C-c C-z
   Add a time-stamped note to the LOGBOOK drawer. 
   See also (setq org-log-into-drawer t)
-
+  
   C-x C-I
   Indent
 
