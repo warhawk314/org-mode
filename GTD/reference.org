@@ -18,35 +18,7 @@ Backups are done on PC using the Task Scheduler
 see https://blogs.esri.com/esri/arcgis/2013/07/30/scheduling-a-scrip/
 
 *** Q-Pulse 
-PC Application - Press Start Windows, Type/Start Q-Pulse
-<<Q-Pulse>> Group IS (Micheal Muller) informed that I can use my Windows Account to login
-Just start the App, don't normally need to login.
-
-General:
-- use F5 to refresh Q-Pulse screens
-- *don't forget to save regularly*
-
-**** Create New Audit - File / New Audit  
-Top Right - Title, press small button containing 3 small dots 
-    (Example here is a service project at ESOC (OCEILS16 - Estrack ILS services @ ESOC(Projects\)) - Select Search For, Product Service, Projects, <the project name> 
-    Make sure that the project number (e.g. PRO-133) is consistent with those on the G-Drive:
-      [[G:\PMO\04 QA\AUDITING\Internal Audits]] 
-Enter Scheduled Start and end times (also Actual Times)
-Enter Auditor and Auditee
-Scope should be set automatically, but note to select ISO9001:2015 in the “Area of Standard” Managed List. 
-
-**** Create Checklist (questions to be asked)
-On Checklists form, select Add "Checklist"
-Add new question: just type into "add an item to the checlist" and press return
-Note - that can use section headers (just enter section header text and press return, double click on section header
-and set "Mark as Scetion header"), and rearrange using arrow keys
-Press OK at end, and then save
-**** Add/View attachments (e.g. images) 
-Add images/attachment  : Actions / Add Attachment / Add Files (multiple files can be selected at once)
-View images/attachment : Actions / Edit Properties / Attachments
-
-Alternatively, use the Properties frame at bottom for adding/viewing.
-
+See QA / Tools
 *** PC Display Resolution 
 1920 * 1080 (Windows, Advanced Display Settings)
 ** TPZ 
@@ -67,7 +39,8 @@ After Invite has been sent, can verify people have accepted invite:
   Double click on booked meeting room/time
   Scheduling Assistent
   Confirm on left "All Attendees"
-
+*** Our Section at TPZV (for Replicon training, etc) 
+Best guess currently is GSS (i.e. training recently in Jan. 2018) I booked to Resource Management (GSS) / Training / Classroom Training
 *** Telefunk 
 [[https://telefunk.telespazio-vega.de/Pages/Home.aspx][Telefunk]]
   [[https://telefunk.telespazio-vega.de/supportservices/timerecording/Pages/Home.aspx][Timesheets]]
@@ -75,6 +48,9 @@ After Invite has been sent, can verify people have accepted invite:
   [[https://telefunk.telespazio-vega.de/supportservices/humanResources/legalaspects/Documents/Teilzeit-Info%2520Telefunk_Okt%25202015.pdf][Part-Time (PDF)]]
   [[http://www.gesetze-im-internet.de/tzbfg/__8.html][Part-Time (Law)]]
   [[https://telefunk.telespazio-vega.de/supportservices/humanResources/benefits/Pages/Payroll-News-2018.aspx][Payroll/Tax info 2018]]
+  [[https://telefunk.telespazio-vega.de/supportservices/humanResources/performance-review/Pages/default.aspx][Performance Review]]
+*** IMS 
+[[https://ims.telespazio-vega.de/Lists/Company%20Processes/DispForm.aspx?ID=123&RootFolder=%2FLists%2FCompany%20Processes][Personal Development Review Process]]
 *** Replicon 
 https://na1.replicon.com/TelespazioVega/main.aspx
 *** Forms
@@ -118,13 +94,26 @@ Replayer functionality of TM Spacon. An example use case is replaying 2002 data 
 an incomplete ONLC VC2 archive. Since the verifier does not consider S1 packets being received on the offline
 stream, this functionality enables the user to consolidate TC verification states.
 ** CFIs
+
 *Important !* See individual LOGBOOK for update / patch details
 
 *** MCS D3.6.5 based on S2K 5.4.15 (plus EFRs)
 *** FARC 2.1.7 (plus EFRs)
 *** SMF 2.4.0      (plus EFRs: smf#624, matis25#21, smf#639, smf#640, smf#641, smf#637, smf#642)
-*** SMF S2K 5.4.21 (plus automati#107, automati#114 + Gaia extensions for access to new Gaia functionality in TM Spacon, FTM etc.)
+*** SMF S2K 5.4.21 (plus automati# patches)
 :LOGBOOK:
+
+- Note taken on [2018-02-06 Di 14:02] \\
+  *SMF S2K SMON* patch now installed on *gaiamcc2/3*
+- 6/2/18 SK> problem of dedicated SMON used by MATIS. Patch builds OK now, installed on *gaiamcc2/3* (new SMF_S2K,
+  Properties updated and MMI and TKMA updated for 3 SMF SMON servers.
+
+  I have now deployed the patch for AUTOMATI-172 / AUTOMATI-190. SMF started OK, but I have not started MATIS.
+  (although I am not 100% sure about the SMF_S2K properties, esp. w.r.t. which SMON will now be used (SHARED or DEDICATED))
+  
+  Also note that there are now 3 SMF SMON tasks on the Task Launcher SMF tab - they are not autostarted, but will be started/stopped by SMF (we hope !)
+  
+  Ran will test the installation after lunch.
 - Note taken on [2018-01-12 Fr 12:02] \\
   Hi Norbert,
   
@@ -143,6 +132,8 @@ stream, this functionality enables the user to consolidate TC verification state
   
   Regards, Simon
 :END:
+plus automati#107, automati#114, automati#172, automati#190 + Gaia extensions for access to new Gaia functionality in TM
+Spacon, FTM etc.)
 *** ECS/LMS 1.0.8 
 **** Restart of stop working
 [2018-01-12 Fr] Dear all,
@@ -158,7 +149,12 @@ and is the Prime LMS Server for Gaia. Gaia LMS reports ECSB errors because that 
 As mentioned by Simon, Gaia connects to ecsb (on Halley) as our prime LMS server. I assume this means we use LMS-B, i.e.
 ecsa runs LMS-A, ecsb runs LMS-B. Therefore if LMS-B is the operational one then it should be fine.
 
-*** MATIS 2.5.11
+*** MATIS 2.5.11 (2.5.12 on gaiamcc2/3)
+:LOGBOOK:
+- Note taken on [2018-02-06 Di 14:09] \\
+  1/2/18: SK:
+  @Lukasz/Simon - I assume Lukasz can now install *Matis 2.5.12* onto *gaiamcc2/3*, but regarding the SMF4S2K patch how will we handle it?  Can Simon take it from the S2K_5-4/development branch and merge it into the Gaia SMF4S2K to install on the test machines, since it's based on 5.4.21 so should be applicable for us?  It would be good to get this asap so we can start testing again.
+:END:
 [[file+sys:P:\GAIAMDS\Documentation\SWS\Spacon MCS Procedures\D01 - GAIA-ESC-TN-0097 (Gaia MATIS Operational Concept i1r0draft).docx]]
 **** Restart if problem
 [2018-01-12 Fr] Hi Simon, 
@@ -168,8 +164,10 @@ Is the LMS data archiving working again?
 
 Cheers 
 Marco Zambianchi
-
+**** SMON 
+See [[SMON for MATIS]]
 *** SLE API 3.4.0 
+*** GFTS 3.1.1 p1 
 *** DARC 2.5.0p2
 :LOGBOOK:
 - Note taken on [2017-12-19 Di 14:57] \\
@@ -204,6 +202,46 @@ Marco Zambianchi
 - Note taken on [2017-12-11 Mo 11:04] \\
   Checked with Simon
 :END:
+**** Restart of DARC (and due to DUDs) 
+PC: 31/1/18: The DARC seems to be having some problems with the last couple of consolidations, with many duds. We just
+re-started DARC on LTA and let DARC Vader re-start everything, so hopefully it improves now. No gaps in ARES observed so
+far though. Re-starting DARC automatically after a configurable number of duds is precisely one of the improvements
+Joerg is working on, so hopefully this will be dealt with better in future.
+--
+SK:[2018-01-31 Mi] OK: thanks. I suspect that the Dud problem is related to the Cons trying to start during Live TM, so
+I guess we will see more of this now that there are more Passes (80%+ coverage) (I guess there is a GPS?).
+--
+SK:[2018-02-13 Di] 
+Dear all.
+
+Looks like we are back on track now: it needed:
+
+- No TM
+- stop Vader
+- kill DARC/PDG/PARCret/CPD
+- start CPD/PARCret
+- start Vader (-> DARC/PDG started)
+
+I expect the current Cons to be OK even when the next Pass starts, but we will see what happens.
+
+If the next Cons does not start it may be better to go back to a manual procedure until we have a solution and/or there are less Passes.
+1) stop Vader from submitting Consolidations, and only allow it to manage crashed DARC/PDG
+2) SPACON notes the Time of when a Cons could be done up till, but only submits it when there is a gap in the Passes.
+
+(I am now sending the logs to Erwin)
+
+(I will look at Live gaps now.)
+SK
+
+--
+[2018-02-13 Di] Hi Erwin,
+
+Following LOS I tried a few things, and have dumped more log files on gaialtd.
+
+1) No TM - Cons does not work
+2) No TM + restart DARC and PDG does not work (and also gave a MySQL error!)
+3) No TM + restart CPD-TM/PARCretTM/DARC/PDG - *Cons. now running OK for half hour*
+
 **** Explanation of DUDs (marked yellow in DashBoard) + Dashboard Jobs Display
 
 Yellow is 'nominal'. 3 3ypes:
@@ -230,6 +268,10 @@ NOTE !!
 days, but for days 4-10 it only shows the *Yellow/Red* entries, not the OK ones
 ! (If you want to check the older OK ones, you scroll back to an older Dashboard
 page.)
+
+---
+
+Note is seems that consolidations are worse duing live reception. See more reliable outside of a pass.
 
 **** In case the DARC PDG Gen (i.e. the process that consolidates VC2) get stuck - i.e. the LCT does not move
 
@@ -313,11 +355,6 @@ Thanks for the clarification.
 If the DARC DB (e.g. on LTB) fills up, then can manually delete data by selecting archive (on left) and then select time
 range to delete. Note normally LTB DARC is not running (nor DARC Vader), so live data is not processed and hence the
 DARC DB does not fill up (assuming consolidation by Spacon is also not done).
-**** Restart of DARC (and due to DUDs) 
-PC: 31/1/18: The DARC seems to be having some problems with the last couple of consolidations, with many duds. We just
-re-started DARC on LTA and let DARC Vader re-start everything, so hopefully it improves now. No gaps in ARES observed so
-far though. Re-starting DARC automatically after a configurable number of duds is precisely one of the improvements
-Joerg is working on, so hopefully this will be dealt with better in future.
 
 *** DABYS FW 1.5/S2K-DM 1.4
 *** EDDS 1.5.0 
@@ -334,7 +371,6 @@ rm -rf failed/637867
 
 This will create a temporary 'camel lock' file in the folder - ARES will reimport the parameter after couple of minutes,
 Failed folder should remain empty after the new import,
-
 *** EUD 2.4 (used by the PUS displays) 
 *** EUD TM Desktop (controlled by FCT)
 *** MCCM 4.0.1 
@@ -345,6 +381,41 @@ I understand that "CSAM Gateway" is provided as a single Jar file which we need 
 it connects to SMF and then provides a port that the DataMiner connects to:
 
 S2K <-> SMF Server (SDS+SRH+SM) <-> CSAM Gateway (i.e. this is a SMF Client) <-> CSAM Driver ("embedded in DataMiner")
+*** SMON 
+**** Usage on context of MATIS
+<<SMON for MATIS>>
+The MATIS configuration variable used as selector of the type of SMON server to be used is the TM.IsSharedServer. 
+
+TM.IsSharedServer = true
+If the TM.IsSharedServer = true then the MATIS will acquire the SMF_S2K live provision System Element that
+starts/connect to the S2K SMON live shared server instantiating a SMON client Till there is something RUNNING or simply
+loaded in the MATIS calendar that refer to the SMON service provision, MATIS will not trigger any deregistration request
+toward SMF At certain point in time all the procedures may have finished their execution, thus MATIS may trigger or not
+(TM.IsSharedServerShutdownEnabled setting) the deregistration of the acquired SMF_S2K live provision SE During the
+SMF_S2K live provision SE deregistration, the instantiated SMON client is deregistered from the SMON live shared server.
+In S2K vanilla, upon deregistration of a SMON client from the SMON live SHARED server, the server continue to be alive
+(i.e. does not shutdown)
+
+
+TM.IsSharedServer = false
+In this case, MATIS will acquire from SMF_S2K the live provision System Element that starts one S2K SMON live
+(dedicated) server instantiating a SMON client Till there is something RUNNING or simply loaded in the MATIS calendar
+that refer to the SMON service provision, MATIS will not trigger any deregistration request toward SMF At certain point
+in time all the procedures may have finished their execution, thus MATIS will trigger the deregistration of the acquired
+SMF_S2K live provision SE During the SMF_S2K live provision SE deregistration, the instantiated SMON client is
+deregistered from the SMON live dedicated server. In S2K vanilla, upon deregistration of a SMON client from the SMON
+live DEDICATED server, the server does automatically shutdown
+
+If the procedure is re-executed, a new SE will be acquired and new SMON live dedicated server re-started.
+
+
+The AUTOMATI-190 and 172 instead are fixes allowing SMF_S2K to monitor the aliveness status of any SMON started by
+SMF_S2K and still referenced by the instantiated System Element acquired by a SMF_S2K client. As soon as the SMON
+crashes, SMF_S2K detects it is not alive anymore (but still used by a SMF_S2K client) and automatically request the
+re-start to the S2K TKMA application. In case the SMF_S2K System Element using this SMON dedicated server is
+deregistered (because not used anymore by a SMF_S2K client), the SMON client is deregistered from the SMON dedicated
+server and the latter will self shutdown. SMF_S@K will not restart it because it’s a shutdown operation and not a crash
+
 ** Dashboard 
 *** Cannot access Dashboard on gaiamca/gaiamcb
 This (and other symptoms) suggests a glitch between the Ops and Dev LANs since last Friday.
@@ -395,6 +466,41 @@ TN: [[P:\GAIAMDS\Documentation\INC\Gaia ESOC documentation\GAIA-ESC-TN-0108 v1.0
 The file partition that MySQL is lcoated on is always near 100% (designed this way to allow MySQL to use entire partition.
 Can create new PARC DB using PARC Tool (Create Dataspace).
 Can delete database using MySQL 'drop' command. This does not actually free up space straight away (MySQL will decide when).
+** NIS 
+*** Links Description
+Hi Rui, 
+
+As you well know the NIS HCI provides an overview tab where the user can monitor the status of all the connected SLE
+links. Below is an example for Gaia during a nominal pass, which is useful for the Spacons to monitor not only the
+"active links" (equipment = NN11*) but also for the "safe mode links" (equipment = NN13*), which are always connected
+during a pass just in case Gaia enters it's Safe Mode TM rate at which point these links would receive TM and the active
+links would stop.
+
+#+DOWNLOADED: file:C%3A/Users/mclements/Documents/Emacs/GTD/Images/NIS_Links_Pic.gif @ 2018-02-01 15:13:45
+[[file:Gaia/NIS_Links_Pic_2018-02-01_15-13-45.gif]]
+
+With the arrival of the new TTCP equipment at the deep-space stations to replace the old IFMS/TMTCS machines, the
+configurations are in the process of changing a bit. Instead of 3 separate IFMS/TMTCS chains at each station, there will
+now be two TTCP units that are each capable of handling up to four separate sets of links, i.e. the equivalent of moving
+from 3 to 8 (!) chains as far as SLE connectivity is concerned.
+
+On any given day Gaia, and likely most/all missions using TTCP, will connect to a single equipment, e.g. NN14, to use
+the pseudonyms above to refer to TTCP-2 at NNO. We will connect two sets of links to NN14, one for the "active links"
+and one for the "safe mode links". This is possible since in each TTCP SICF there will be four functional groups (fg's)
+defined, associated to each of the four TM chains inside the TTCP. The problem with this is that we will lose the
+identification of which link belongs to which chain in the MMI above, since we cannot see the fg information and the
+equipment will be NN14 in both cases.
+
+Could the display be improved to provide this information somehow? In the SICF this information is only available from
+the service-instance-id field, e.g.
+
+service-instance-id = "sagr=123.spack=NN14-PERM.rsl-fg=1.rcf=onlt0000"; 
+service-instance-id = "sagr=123.spack=NN14-PERM.rsl-fg=2.rcf=onlt0000"; 
+service-instance-id = "sagr=123.spack=NN14-PERM.rsl-fg=3.rcf=onlt0000"; 
+service-instance-id = "sagr=123.spack=NN14-PERM.rsl-fg=4.rcf=onlt0000"; 
+
+Obviously displaying this full string would not be that useful (and duplicate a lot of information in the other
+columns). Extracting just the "fg=x" and showing that would solve the problem, but I'm not sure how easy that would be.
 
 * QA
 ** Documentation
@@ -432,8 +538,38 @@ See [[https://ims.telespazio-vega.de/Lists/Company%20Processes/DispForm.aspx?ID=
 Also:
 http://www.exemplarglobalcollege.org/how-to-report-your-audit-findings/
 ** Tools 
-*** Q-Pulse
-See [[Q-Pulse]]
+*** Q-Pulse 
+PC Application - Press Start Windows, Type/Start Q-Pulse
+<<Q-Pulse>> Group IS (Micheal Muller) informed that I can use my Windows Account to login
+Just start the App, don't normally need to login.
+
+General:
+- use F5 to refresh Q-Pulse screens
+- *don't forget to save regularly*
+
+**** Create New Audit - File / New Audit  
+Top Right - Title, press small button containing 3 small dots 
+    (Example here is a service project at ESOC (OCEILS16 - Estrack ILS services @ ESOC(Projects\)) - Select Search For, Product Service, Projects, <the project name> 
+    Make sure that the project number (e.g. PRO-133) is consistent with those on the G-Drive:
+      [[G:\PMO\04 QA\AUDITING\Internal Audits]] 
+Enter Scheduled Start and end times (also Actual Times)
+Enter Auditor and Auditee
+Scope should be set automatically, but note to select ISO9001:2015 in the “Area of Standard” Managed List. 
+
+**** Create Checklist (questions to be asked)
+On Checklists form, select Add "Checklist"
+Add new question: just type into "add an item to the checlist" and press return
+Note - that can use section headers (just enter section header text and press return, double click on section header
+and set "Mark as Scetion header"), and rearrange using arrow keys
+Press OK at end, and then save
+**** Add/View attachments (e.g. images) 
+Add images/attachment  : Actions / Add Attachment / Add Files (multiple files can be selected at once)
+View images/attachment : Actions / Edit Properties / Attachments
+
+Alternatively, use the Properties frame at bottom for adding/viewing.
+**** Create Report 
+From Q-Pulse main menu (Print / "Choose a Report"), created: Report and Checklist PDFs. These two seemed to include
+everything that other e.g. properties report types included.
 ** ISO Standards Notes and References
 
 ISO 9000 – Fundamentals and Vocabulary, which introduces the basic principles underlying management systems and explains
@@ -795,6 +931,28 @@ systems engineer, an engineer in another discipline who needs to perform
 systems engineering (SE), or an experienced systems engineer who needs a
 convenient reference.
 * EGS-CC 
+** Booking Codes 
+*** On the Job Training (Resource Management (GSS) / Training / OnTheJob Training)
+Dear Mark
+
+Please book the first 3 weeks of work on EGS-CC on on-the-job trainingv
+*Total so far* (end [2018-02-02 Fr]): 81 hours booked 
+
+| Month | Week No. | Hours |                                   |
+| Jan   |        1 |    15 |                                   |
+|       |        2 | 20.25 |                                   |
+|       |        3 | 21.50 |                                   |
+|       |        4 | 11.75 |                                   |
+|       |        5 | 15.25 | [2018-02-02 Fr] total = 83.75 hrs |
+| Feb   |        1 | 12.75 |                                   |
+|       |          |       |                                   |
+#+TBLFM: $3=SUM($3)
+
+*** Normal SDE Installation Booking Code
+VV TEX Valdiation Test Execution and Evaluation - KPJ77966.IVT
+- test installation of SDE environment on [[gedappl10]]
+
+[[https://projects.telespazio-vega.de/egs-cc/Released%20Documents/2017-08-23%20Integration%20Release%202%20Delta%202%20Hotfix%201/egscc-sde/doc/ddf/EGSCC-SDE-SUM-1001-SDEUserManualVol1ContinuousIntegrationandDeveloperEnvironments-I1R5.pdf][SDE User Manual, Vol. 1: Continuous Integration and Developer Environments]]
 ** Accounts 
 *** gedappl10
 mark, sde_user
@@ -820,11 +978,6 @@ Note: Git URL (see Annex A, page 126, SDE SUM): egscc.telespazio-vega.de/git/r/e
 git clone https://mclements@egscc.telespazio-vega.de/git/r/egscc/a-egscc-releases.git
 cd a-egscc-releases
 git checkout ir3_branch
-** Booking Codes 
-VV TEX Valdiation Test Execution and Evaluation - KPJ77966.IVT
-- test installation of SDE environment on [[gedappl10]]
-
-[[https://projects.telespazio-vega.de/egs-cc/Released%20Documents/2017-08-23%20Integration%20Release%202%20Delta%202%20Hotfix%201/egscc-sde/doc/ddf/EGSCC-SDE-SUM-1001-SDEUserManualVol1ContinuousIntegrationandDeveloperEnvironments-I1R5.pdf][SDE User Manual, Vol. 1: Continuous Integration and Developer Environments]]
 ** Linux: Various 
 List installed packages: zypper packages --installed-only
 ** Start VNC (gedappl10) 
@@ -839,3 +992,5 @@ Everything should be setup in mark@gedappl10:~.vnc
    gedappl10:1, password: sde-user
 
    We can adjust connection, etc using 'Windows key' F8
+   
+   
