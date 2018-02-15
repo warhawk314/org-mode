@@ -693,7 +693,7 @@ magit-ediff-dwim-show-on-hunks to t
 https://github.com/magit/magit/issues/1743
 
 Note if dont set this then have to use e.g. AC to copy from diff buffer A to buffer C
-** Source Code Tagging (e.g. GNU Global) 
+** Source Code Tagging (e.g. CTAGS, GNU Global) 
 Good overview: https://stackoverflow.com/questions/12922526/tags-for-emacs-relationship-between-etags-ebrowse-cscope-gnu-global-and-exub
 *** GNU Global
 Spacemacs Layer: https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Btags/gtags
