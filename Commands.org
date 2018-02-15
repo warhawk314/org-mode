@@ -728,12 +728,26 @@ Run global --version  (to confirm running ok)
 [2018-02-10 Sat] Current status: cygwin build worked ok for globals and gtags, installed in cygwin /usr/local/bin
 Iin the Stockfish 6 src direct (projectile project) I successfully created (once) the tags file !
 However after that time, caanot seem to recreate it. Also lookup of symbols does not work.
-Maybe only works with Windows versions for these tools (global and gtags).
-Maybe need to install ctags in cygwin ?
-Another idea - just try ctags (exuberant) by itself.
+- Maybe only works with Windows versions for these tools (global and gtags).
+- Maybe need to install ctags in cygwin ?
+- Another idea - just try ctags (exuberant) by itself.
+- Check that Exuberant ctags is being used (i.e. one in cygwin)
 
 See also 3.6.2 Preparation of https://www.gnu.org/software/global/globaldoc_toc.html#Emacs-editor
 e.g. (setq load-path (cons "/home/owner/global" load-path))
+
+Followed layer instructions:
+Installed Exuberant ctags 5.8.1 in cygwin (/usr/bin)
+cp gtags.conf (from global download folder) to ~/.globalrc
+
+Tried to install windows versions of global and tags. Trying to setup path in
+.spacemacs to windows version, but emacs complains about symbol is void at
+startup. Something wrong with path setting !
+https://www.gnu.org/software/emacs/manual/html_node/elisp/Void-Variables.html
+Try incremental changes in .spacemacs
+
+Maybe try going back to GNU Global instructions.
+
 ** MAGIT 
 When ediffing (via 'e') unstaged files, ediff presents 3 way diff.
 Can set following variable to display expected 2 way diff (for seeing diff for unstaged files):
