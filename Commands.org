@@ -43,69 +43,6 @@ use C-g to cancel it.
 C-c C-f Follow Mode when using Helm
 
 * Setup
-** Cygwin
-Downloaded cygwin 64 bit
-Run install without admin priv (start cmd.exe, invoke: setup-x86_64.exe -no-admin)
-installed base packages
-Note only the *base* Category is installed first (then installed some additional packages e.g. open-ssh and emacs-w32)
-
-Cygwin environment may be started by running Cygwin64 Terminal
-
-Cygwin is installed in C:\cygwin (~400 MB)
-- binaries are kept in C:\cygwin\bin
-- user home is C:\cygwin\home
-- Emacs version is Cygwin emacs-w32 (r25.3-1) (built with win32 native Gui, and using cygwin POSIX system)
-  Note currently emacs only starts correctly (probably path setting) when invoked in cygwin terminal
-
-*** Update and Management of Cygwin Packages
-Open Windows CMD.exe
-cd C:\Users\mclements\Documents\Tools\cygwin
-run: setup-x86_64.exe --no-admin
-
-*** Older Notes (for Windows Emacs build version Interfacing to Cygwin)
-git clone https://github.com/d5884/fakecygpty.git (do in cygwin environment
- or copy files to a folder in cygwin env)
-
-Build according to instructions in: https://github.com/d5884/fakecygpty  :
-
-	gcc -D_GNU_SOURCE -o fakecygpty fakecygpty.c
-	gcc -o qkill qkill.c
-
-copy *.exe into somewhere on you $PATH.
-
-This should create two exes: qkill.exe and fakecygpty.exe
-
-Next: find out how to use in Emacs. Read header of fakecygpty.el).
-See also: https://www.emacswiki.org/emacs/SshWithNTEmacs
-Load Path (Spacemacs): https://gist.github.com/TheBB/367096660b203952c162
-Seems that we only need to push to load_path, i.e: (push "/some/path/" load-path) (see previous link)
-Probably need to use: (require 'my-feature) at some point to load required el file.
-
-Sets your shell to use cygwin's bash
-https://www.emacswiki.org/emacs/NTEmacsWithCygwin
-
-https://github.com/ieure/ssh-el
-https://www.emacswiki.org/emacs/SshWithEmacs
-https://www.emacswiki.org/emacs/AnsiTermHints
-
-https://stackoverflow.com/questions/9670209/cygwin-bash-does-not-display-correctly-in-emacs-shell
-
-
-Status:
-Some progress. Used "fakecygpty ssh mark@.."
-This seemed to work. History works.
-Completion seems to with (WIndows) ALT /   (keyboard at home: ALT Shift 7). This uses Hippie Expand.
-
-Cygwin: installed w32EMacs (emacs version built for Windows)
-Installed Spacemacs in Cygwin (i.e. replaced .emacs.d)
-
-Enable OS to open file in Dired
-"	created marks.el in home account within Cygwin /home/Mark
-"	Updated .spacemacs /user-config() to (load <marks.el>)
-"	This contains redefinition of spacemacs/open-in-external-app (overrides .emacs.d/layers/+distributions/spacemacs-base/funcs.el)
-
-Note that M-X : enables one to run a none-interactive lisp function
-
 ** Location of .emacs.d (home PC) 
 C:\cygwin\home\mclements\.emacs.d (same as /home/mclements/.emacs.d in cygwin environment)
 Previous (Windows build of Emacs): C:\Users\Mark\AppData\Roaming\.emacs.d
@@ -175,7 +112,6 @@ Select the above short cut in the emacs bin folder to macsclientw.exe -n -c
 Press Win+r and in Run dialog type shell:sendto. 
 Copy your newly created shortcut to the emacs client t(i.e. targeting …emacsclientw.exe -n -c) to the sendto folder that just opened. 
 Call the short cut Emacs. This will create an entry in send to context menu so you can right click on any document and choose to open it in Emacs.
-
 ** Environment Search Path
    
    Evaluate (executable-find "find") to see where Emacs finds the find executable
@@ -264,9 +200,72 @@ uno\ due\ tre - search for the string "uno duo tre"
 -C5 foo - search for "foo" but show 5 lines of context before and after the match
 
 (?:^|[^\w-])time(?:[^\w-]|$) - search for lisp-word "time", i.e. search for the full word "time" while considering "-" to be a word characer=
-
 ** Load Path (Spacemacs)
 https://gist.github.com/TheBB/367096660b203952c162
+** Cygwin Notes
+(16/2/18: note: currently Spacemacs based on NT Emacs (i.e. Windows Build) is used at Work)
+
+Downloaded cygwin 64 bit
+Run install without admin priv (start cmd.exe, invoke: setup-x86_64.exe -no-admin)
+installed base packages
+Note only the *base* Category is installed first (then installed some additional packages e.g. open-ssh and emacs-w32)
+
+Cygwin environment may be started by running Cygwin64 Terminal
+
+Cygwin is installed in C:\cygwin (~400 MB)
+- binaries are kept in C:\cygwin\bin
+- user home is C:\cygwin\home
+- Emacs version is Cygwin emacs-w32 (r25.3-1) (built with win32 native Gui, and using cygwin POSIX system)
+  Note currently emacs only starts correctly (probably path setting) when invoked in cygwin terminal
+
+*** Update and Management of Cygwin Packages
+Open Windows CMD.exe
+cd C:\Users\mclements\Documents\Tools\cygwin
+run: setup-x86_64.exe --no-admin
+
+*** Older Notes (for Windows Emacs build version Interfacing to Cygwin)
+git clone https://github.com/d5884/fakecygpty.git (do in cygwin environment
+ or copy files to a folder in cygwin env)
+
+Build according to instructions in: https://github.com/d5884/fakecygpty  :
+
+	gcc -D_GNU_SOURCE -o fakecygpty fakecygpty.c
+	gcc -o qkill qkill.c
+
+copy *.exe into somewhere on you $PATH.
+
+This should create two exes: qkill.exe and fakecygpty.exe
+
+Next: find out how to use in Emacs. Read header of fakecygpty.el).
+See also: https://www.emacswiki.org/emacs/SshWithNTEmacs
+Load Path (Spacemacs): https://gist.github.com/TheBB/367096660b203952c162
+Seems that we only need to push to load_path, i.e: (push "/some/path/" load-path) (see previous link)
+Probably need to use: (require 'my-feature) at some point to load required el file.
+
+Sets your shell to use cygwin's bash
+https://www.emacswiki.org/emacs/NTEmacsWithCygwin
+
+https://github.com/ieure/ssh-el
+https://www.emacswiki.org/emacs/SshWithEmacs
+https://www.emacswiki.org/emacs/AnsiTermHints
+
+https://stackoverflow.com/questions/9670209/cygwin-bash-does-not-display-correctly-in-emacs-shell
+
+
+Status:
+Some progress. Used "fakecygpty ssh mark@.."
+This seemed to work. History works.
+Completion seems to with (WIndows) ALT /   (keyboard at home: ALT Shift 7). This uses Hippie Expand.
+
+Cygwin: installed w32EMacs (emacs version built for Windows)
+Installed Spacemacs in Cygwin (i.e. replaced .emacs.d)
+
+Enable OS to open file in Dired
+"	created marks.el in home account within Cygwin /home/Mark
+"	Updated .spacemacs /user-config() to (load <marks.el>)
+"	This contains redefinition of spacemacs/open-in-external-app (overrides .emacs.d/layers/+distributions/spacemacs-base/funcs.el)
+
+Note that M-X : enables one to run a none-interactive lisp function
 * Major Modes
 ** Projectile
 *** Setup
@@ -648,6 +647,11 @@ Shell
 M-x shell gives you /bin/bash or /bin/sh on Linux. You can make it use your
 preferred alternative shell by M-x customize-variable explicit-shell-file-name.
 
+----
+
+Shared Connections (Putty)
+Note on Windows best to set "use Shared Connections" in Putty setup for SSH (make sure saved in Session at top)
+
 ** Term
 If you just want a repl for emacs lisp, try M-x ielm. Enter (describe-mode) for documentation.
 
@@ -662,6 +666,9 @@ term-char-mode; you'll need them.
 *** Good resources:
 [[https://writequit.org/denver-emacs/presentations/2017-06-20-tramp.html][Emacs TRAMP]]
 [[http://www.howardism.org/Technical/Emacs/literate-devops.html][Org-Mode and TRAMP]]
+
+Shared Connections (Putty)
+Note on Windows best to set "use Shared Connections" in Putty setup for SSH (make sure saved in Session at top)
 ** Diary / Appt 
 We can use diary to add events (days/times) - mapped to SPC o d (can also display Calender via SPC o c then press s)
 An alarm will appear (according to below configuration) just before event time (Emacs will pop-up even if using another application).

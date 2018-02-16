@@ -74,6 +74,11 @@ SPACON on the Science Missions Control Room (Gaia/Integral/XMM)
 [[file+emacs:P:\GAIAMDS\Documentation\SWS\Spacon MCS Procedures\FOP_fromESOC][FOP Ground Procedures]]
 
 Possibly interesting Procedures:
+
+GND-GO-0010: This procedure defines the steps required confirm the mission control system configuration is
+setup as expected after a database distribution is completed.
+-- this is the main restart procedure after DB Roll-Out --
+
 GND-MC-1001: manual re-population of data from the MCS PARC through the DARC to ARES/WebMUST
 
 GND-MC-1002: defines the steps required to fix common issues that can
@@ -84,9 +89,6 @@ GMD-MC-1006: Gaia Leap Second Handling
 GND-MC-0001: This procedure defines all steps required to start (and stop) the Gaia MCS server(s) and client(s).
 It is assumed the workstations are completely logged out at the beginning of the setup procedure.
 But see also GND-GO-0010.
-
-GND-GO-0010: This procedure defines the steps required confirm the mission control system configuration is
-setup as expected after a database distribution is completed.
 
 GND-MC-0006:
 This procedure provides the required steps to replay TM from one data stream on another one using the TM
@@ -100,6 +102,10 @@ stream, this functionality enables the user to consolidate TC verification state
 *** MCS D3.6.5 based on S2K 5.4.15 (plus EFRs)
 *** FARC 2.1.7 (plus EFRs)
 *** SMF 2.4.0      (plus EFRs: smf#624, matis25#21, smf#639, smf#640, smf#641, smf#637, smf#642)
+:LOGBOOK:
+- Note taken on [2018-02-15 Do 15:50] \\
+  Confirmed by SK:[2018-02-15 Do]
+:END:
 *** SMF S2K 5.4.21 (plus automati# patches)
 :LOGBOOK:
 
